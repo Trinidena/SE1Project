@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="292.0" minWidth="365.0" prefHeight="292.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.rx_manager.view.DisplayPage">
+   <children>
+      <Label layoutX="241.0" layoutY="52.0" text="Album">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="6.0" text="Song Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="songTitleTextField" layoutX="21.0" layoutY="31.0" />
+      <Label layoutX="76.0" layoutY="59.0" text="Artist">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="artistTextField" layoutX="21.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="204.0" layoutY="109.0" text="Rank">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="109.0" text="Genre">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="genreTextField" layoutX="18.0" layoutY="126.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="albumTextField" layoutX="186.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="yearTextField" layoutX="269.0" layoutY="126.0" prefHeight="25.0" prefWidth="66.0" />
+      <Label layoutX="289.0" layoutY="109.0" text="Year">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rankTextField" layoutX="186.0" layoutY="126.0" prefHeight="25.0" prefWidth="66.0" />
+      <Label layoutX="230.0" layoutY="23.0" text="OPTIONAL" underline="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tagTextField1" layoutX="186.0" layoutY="170.0" prefHeight="25.0" prefWidth="66.0" />
+      <Label layoutX="209.0" layoutY="153.0" text="Tag">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
