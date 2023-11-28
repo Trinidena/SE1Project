@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="292.0" minWidth="365.0" prefHeight="292.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.rx_manager.view.AddPage">
+<AnchorPane minHeight="292.0" minWidth="365.0" prefHeight="292.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.playlist_generator.view.AddPage">
    <children>
       <Label layoutX="241.0" layoutY="52.0" text="Album">
          <font>
