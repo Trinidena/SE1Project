@@ -33,14 +33,22 @@ public class LandingPage {
     @FXML private Button generateButton;
 
     @FXML
-    void removeSong(ActionEvent event) {
-    	final Song selectedItem = this.songs.getSelectionModel().getSelectedItem();
-		if (selectedItem != null) {
-    		this.songs.getItems().remove(selectedItem);
-    	}
-		this.songDetailsTextArea.clear();
+    void handleRemoveSongButton(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(Main.class.getResource(Main.CONFIRMATION_DIALOG_FXML));
+    	loader.load();
+    	Parent parent = loader.getRoot();
+    	Scene scene = new Scene(parent);
+    	Stage addTodoStage = new Stage();
+    	addTodoStage.setTitle(Main.TITLE);
+    	addTodoStage.setScene(scene);
+    	addTodoStage.initModality(Modality.APPLICATION_MODAL);
+    	ConfirmationDialog confirmationDialog = loader.getController();
+    	confirmationDialog.bind(this.songs.getItems(), this.songs.getSelectionModel().getSelectedItem());
+    	this.songDetailsTextArea.clear();
+    	addTodoStage.show();
     }
-    
+
     @FXML
     void addSongButton(ActionEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader();
@@ -103,5 +111,6 @@ public class LandingPage {
     void initialize() {
     	songs.setStyle("-fx-font-size: 1.5em;");
     	songs.setStyle("-fx-font: normal bold 20 'Verdana'");
+    	songDetailsTextArea.setEditable(false);
     }
 }
