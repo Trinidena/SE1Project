@@ -66,6 +66,24 @@ public class LandingPage {
     	addTodoStage.show();
 
     }
+    
+    @FXML
+    void handleGenerateButton(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(Main.class.getResource(Main.PLAYLIST_PAGE_FXML));
+    	loader.load();
+    	Parent parent = loader.getRoot();
+    	Scene scene = new Scene(parent);
+    	Stage addTodoStage = new Stage();
+    	addTodoStage.setTitle(Main.TITLE);
+    	addTodoStage.setScene(scene);
+    	addTodoStage.initModality(Modality.APPLICATION_MODAL);
+    	PlaylistPage playlistPage = loader.getController();
+    	playlistPage.bind(this.songs.getItems());
+    	
+    	addTodoStage.show();
+
+    }
 
 	
 //	@FXML
