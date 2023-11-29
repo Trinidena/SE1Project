@@ -82,7 +82,7 @@ public class LandingPage {
     @FXML
     void displaySongDetails(MouseEvent event) throws IOException {
     	final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
-    	songDetailsTextArea.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+    	this.songDetailsTextArea.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
     	this.songDetailsTextArea.setText(formatSongDetails(selectedSong));
 
     }
