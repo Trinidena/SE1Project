@@ -76,7 +76,7 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return this.songTitle + " " + this.artist + " " + genre;
+		return this.songTitle;
 	}
 
 	public String getTag() {
