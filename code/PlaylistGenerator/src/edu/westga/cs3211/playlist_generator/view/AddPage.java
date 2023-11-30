@@ -23,6 +23,7 @@ public class AddPage {
 	@FXML private TextField songTitleTextField;
 	@FXML private TextField artistTextField;
 	@FXML private TextField genreTextField;
+	@FXML private TextField tagTextField;
 
 	private ObservableList<Song> songs;
 
@@ -44,7 +45,7 @@ public class AddPage {
 	@FXML
 	void addSongButton(ActionEvent event) {
 		Song song = new Song(this.songTitleTextField.getText(),
-			 this.artistTextField.getText(), this.genreTextField.getText());
+			 this.artistTextField.getText(), this.genreTextField.getText(), this.tagTextField.getText());
 	
 		this.songs.add(song);
 		
