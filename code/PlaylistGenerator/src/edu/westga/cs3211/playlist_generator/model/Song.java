@@ -20,13 +20,14 @@ public class Song {
 	 * @param artist is the owner of the song
 	 * @param genre is the category of the song
 	 */
-	public Song(String songTitle, String artist, String genre) {
+	public Song(String songTitle, String artist, String genre, String tag) {
 			if(songTitle == null || artist == null || genre == null) {
 				throw new IllegalArgumentException();
 		}
 		this.songTitle = songTitle;
 		this.artist = artist;
 		this.genre = genre;
+		this.tag = tag;
 	}
 	
 	/** name of the RX
@@ -76,7 +77,7 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return this.songTitle;
+		return this.songTitle + "		" + this.tag;
 	}
 
 	public String getTag() {
