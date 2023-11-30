@@ -17,15 +17,31 @@ import javafx.scene.control.TextField;
  * @version HW1
  */
 public class AddPage {
-	@FXML private ResourceBundle resources;
-	@FXML private URL location;
+	@FXML
+	private ResourceBundle resources;
+	@FXML
+	private URL location;
 
-	@FXML private TextField songTitleTextField;
-	@FXML private TextField artistTextField;
-	@FXML private TextField genreTextField;
-	@FXML private TextField tagTextField;
+	@FXML
+	private TextField songTitleTextField;
+	@FXML
+	private TextField artistTextField;
+	@FXML
+	private TextField genreTextField;
+	@FXML
+	private TextField tagTextField;
+	@FXML
+	private TextField albumTextField;
+
+	@FXML
+	private TextField rankTextField;
+
+	@FXML
+	private TextField yearTextField;
 
 	private ObservableList<Song> songs;
+
+	private Song addedSong;
 
 	/**
 	 * Binds the data from the song object to the appropriate display fields.
@@ -44,11 +60,15 @@ public class AddPage {
 
 	@FXML
 	void addSongButton(ActionEvent event) {
-		Song song = new Song(this.songTitleTextField.getText(),
-			 this.artistTextField.getText(), this.genreTextField.getText(), this.tagTextField.getText());
-	
+		Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(),
+				this.genreTextField.getText(), this.tagTextField.getText());
+
+		this.addedSong = song;
+
+		this.setOptionalItems();
+
 		this.songs.add(song);
-		
+
 		((Node) (event.getSource())).getScene().getWindow().hide();
 
 	}
@@ -61,5 +81,14 @@ public class AddPage {
 
 	@FXML
 	void initialize() {
+	}
+
+	private void setOptionalItems() {
+		String albumName = this.albumTextField.textProperty().get();
+
+		if (!albumName.isEmpty()) {
+			this.addedSong.setAlbum(albumName);
+		}
+
 	}
 }

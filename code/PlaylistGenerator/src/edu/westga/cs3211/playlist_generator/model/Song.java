@@ -1,6 +1,7 @@
 package edu.westga.cs3211.playlist_generator.model;
 
-/** Stores and manages information for a single Prescription.
+/**
+ * Stores and manages information for a single Prescription.
  * 
  * @author CS 3211
  * @version HW1
@@ -10,70 +11,145 @@ public class Song {
 	private String artist;
 	private String genre;
 	private String album;
-	private String rank;
-	private String year;
+	private int rank;
+	private int year;
 	private String tag;
-	
-	/** Create a new song with the provided information.
+
+	/**
+	 * Create a new song with the provided information.
 	 * 
 	 * @param songTitle is the title of the song
-	 * @param artist is the owner of the song
-	 * @param genre is the category of the song
+	 * @param artist    is the owner of the song
+	 * @param genre     is the category of the song
 	 */
 	public Song(String songTitle, String artist, String genre, String tag) {
-			if(songTitle == null || artist == null || genre == null) {
-				throw new IllegalArgumentException();
+		if (songTitle == null || artist == null || genre == null) {
+			throw new IllegalArgumentException();
 		}
 		this.songTitle = songTitle;
 		this.artist = artist;
 		this.genre = genre;
 		this.tag = tag;
 	}
-	
-	/** name of song
+
+	/**
+	 * name of song
+	 * 
 	 * @return the name
 	 */
 	public String getSongTitle() {
 		return this.songTitle;
 	}
 
-	/** artist for the song
+	/**
+	 * Sets the song title
+	 * 
+	 * @param newTitle
+	 */
+
+	public void setSongTitle(String newTitle) {
+		this.songTitle = newTitle;
+	}
+
+	/**
+	 * artist for the song
+	 * 
 	 * @return the artist
 	 */
 	public String getArtist() {
 		return this.artist;
 	}
 
-	/** genre for the song
+	/**
+	 * Sets the artist name
+	 * 
+	 * @param newArtist
+	 */
+
+	public void setArtistName(String newArtist) {
+		this.artist = newArtist;
+	}
+
+	/**
+	 * genre for the song
+	 * 
 	 * @return the refill
 	 */
 	public String getGenre() {
 		return this.genre;
 	}
 
-	/** album for the song
+	/**
+	 * Sets the genre
+	 * 
+	 * @param newGenre
+	 */
+
+	public void setGenre(String newGenre) {
+		this.genre = newGenre;
+	}
+
+	/**
+	 * album for the song
+	 * 
 	 * @return the album
 	 */
 	public String getAlbum() {
 		return this.album;
 	}
 
-	/** rank of the song
+	/**
+	 * Sets the Album name
+	 * 
+	 * @param newAlbum
+	 */
+
+	public void setAlbum(String newAlbum) {
+		this.album = newAlbum;
+	}
+
+	/**
+	 * rank of the song
+	 * 
 	 * @return the rank
 	 */
-	public String getRank() {
+	public int getRank() {
 		return this.rank;
 	}
 
-	/** year for the song
+	/**
+	 * Sets the rank
+	 * 
+	 * @param newRank
+	 */
+
+	public void setRank(int newRank) {
+		this.rank = newRank;
+	}
+
+	/**
+	 * year for the song
+	 * 
 	 * @return the year
 	 */
-	public String getYear() {
+	public int getYear() {
 		return this.year;
 	}
 
-	/** Convert object to a String representation.
-	 *  @return String representation of the Song object
+	/**
+	 * Sets the year
+	 * 
+	 * @param newYear
+	 */
+
+	public void setYear(int newYear) {
+		this.year = newYear;
+	}
+
+	/**
+	 * Convert object to a String representation.
+	 * 
+	 * @return String representation of the Song object
 	 */
 	@Override
 	public String toString() {
