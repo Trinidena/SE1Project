@@ -10,15 +10,20 @@
 <AnchorPane minHeight="441.0" minWidth="457.0" prefHeight="441.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.playlist_generator.view.LandingPage">
    <children>
       <ListView fx:id="songs" layoutX="15.0" layoutY="49.0" onMouseClicked="#displaySongDetails" prefHeight="378.0" prefWidth="202.0" />
-      <Label layoutX="203.0" layoutY="10.0" text="Songs">
+      <Label layoutX="90.0" layoutY="21.0" text="Songs">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Button layoutX="15.0" layoutY="22.0" mnemonicParsing="false" onAction="#addSongButton" text="+" />
-      <Button layoutX="48.0" layoutY="22.0" mnemonicParsing="false" onAction="#removeSong" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button layoutX="48.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleRemoveSongButton" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button layoutX="406.0" layoutY="415.0" mnemonicParsing="false" onAction="#editButton" text="Edit" />
-      <Button fx:id="generateButton" layoutX="378.0" layoutY="12.0" mnemonicParsing="false" text="Generate" />
+      <Button fx:id="generateButton" layoutX="378.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleGenerateButton" text="Generate" />
       <TextArea fx:id="songDetailsTextArea" layoutX="243.0" layoutY="49.0" prefHeight="365.0" prefWidth="200.0" />
+      <Label layoutX="291.0" layoutY="21.0" text="Details">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
