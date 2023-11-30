@@ -17,6 +17,7 @@ public class Main extends Application {
 	public static final String DISPLAY_PAGE = "view/DisplayPage.fxml";
 	public static final String CONFIRMATION_DIALOG_FXML = "view/ConfirmationDialog.fxml";
 	public static final String PLAYLIST_PAGE_FXML = "view/PlaylistPage.fxml";
+	public static final String GENERATE_PLAYLIST_PAGE_FXML = "view/GeneratePlaylistPage.fxml";
 
     /**
      * JavaFX entry point.
