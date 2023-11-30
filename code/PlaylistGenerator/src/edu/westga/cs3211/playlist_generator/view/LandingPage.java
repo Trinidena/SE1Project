@@ -70,7 +70,7 @@ public class LandingPage {
     @FXML
     void handleGenerateButton(ActionEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(Main.class.getResource(Main.PLAYLIST_PAGE_FXML));
+    	loader.setLocation(Main.class.getResource(Main.GENERATE_PLAYLIST_PAGE_FXML));
     	loader.load();
     	Parent parent = loader.getRoot();
     	Scene scene = new Scene(parent);
@@ -78,8 +78,8 @@ public class LandingPage {
     	addTodoStage.setTitle(Main.TITLE);
     	addTodoStage.setScene(scene);
     	addTodoStage.initModality(Modality.APPLICATION_MODAL);
-    	PlaylistPage playlistPage = loader.getController();
-    	playlistPage.bind(this.songs.getItems());
+    	GeneratePlaylistPage page = loader.getController();
+    	page.bind(this.songs.getItems());
     	
     	addTodoStage.show();
 

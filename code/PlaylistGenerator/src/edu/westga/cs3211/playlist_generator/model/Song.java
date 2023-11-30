@@ -29,50 +29,50 @@ public class Song {
 		this.genre = genre;
 	}
 	
-	/** name of the RX
+	/** name of song
 	 * @return the name
 	 */
 	public String getSongTitle() {
 		return this.songTitle;
 	}
 
-	/** dosage amount for the RX
-	 * @return the dosage
+	/** artist for the song
+	 * @return the artist
 	 */
 	public String getArtist() {
 		return this.artist;
 	}
 
-	/** number of refills remaining for the RX
+	/** genre for the song
 	 * @return the refill
 	 */
 	public String getGenre() {
 		return this.genre;
 	}
 
-	/** number of doses remaining for the RX
-	 * @return the doses
+	/** album for the song
+	 * @return the album
 	 */
 	public String getAlbum() {
 		return this.album;
 	}
 
-	/** purpose of the RX (i.e., why am I taking this medication?)
-	 * @return the purpose
+	/** rank of the song
+	 * @return the rank
 	 */
 	public String getRank() {
 		return this.rank;
 	}
 
-	/** any known side effects for the RX
-	 * @return the effects
+	/** year for the song
+	 * @return the year
 	 */
 	public String getYear() {
 		return this.year;
 	}
 
 	/** Convert object to a String representation.
-	 *  @return String representation of the RX object
+	 *  @return String representation of the Song object
 	 */
 	@Override
 	public String toString() {
