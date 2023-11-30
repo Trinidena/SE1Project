@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Button layoutX="15.0" layoutY="22.0" mnemonicParsing="false" onAction="#addSongButton" text="+" />
-      <Button layoutX="48.0" layoutY="22.0" mnemonicParsing="false" onAction="#removeSong" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="handleRemoveSongButton" layoutX="48.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleRemoveSongButton" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button layoutX="406.0" layoutY="415.0" mnemonicParsing="false" onAction="#editButton" text="Edit" />
       <Button fx:id="generateButton" layoutX="378.0" layoutY="12.0" mnemonicParsing="false" text="Generate" />
       <TextArea fx:id="songDetailsTextArea" layoutX="243.0" layoutY="49.0" prefHeight="365.0" prefWidth="200.0" />

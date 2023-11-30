@@ -15,6 +15,7 @@ public class Main extends Application {
     public static final String LANDING_PAGE_FXML = "view/LandingPage.fxml";
 	public static final String ADD_PAGE = "view/AddPage.fxml";
 	public static final String DISPLAY_PAGE = "view/DisplayPage.fxml";
+	public static final String CONFIRMATION_DIALOG_FXML = "view/ConfirmationDialog.fxml";
 
     /**
      * JavaFX entry point.
