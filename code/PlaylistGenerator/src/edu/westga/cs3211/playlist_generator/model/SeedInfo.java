@@ -1,7 +1,5 @@
 package edu.westga.cs3211.playlist_generator.model;
 
-import java.util.ArrayList;
-
 public class SeedInfo {
 
 	private String songTitle;
