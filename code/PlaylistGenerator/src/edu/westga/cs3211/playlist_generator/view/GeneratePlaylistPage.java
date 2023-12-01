@@ -20,53 +20,53 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GeneratePlaylistPage {
-	
+
 	private ObservableList<Song> songs;
-	
+
 	private ArrayList<Song> generatedSongs;
-	
+
 	private SeedInfo seedInfo;
-    @FXML
-    private TextField albumTextField;
+	@FXML
+	private TextField albumTextField;
 
-    @FXML
-    private TextField artistTextField;
+	@FXML
+	private TextField artistTextField;
 
-    @FXML
-    private Button cancelButton;
+	@FXML
+	private Button cancelButton;
 
-    @FXML
-    private Button generateButton;
+	@FXML
+	private Button generateButton;
 
-    @FXML
-    private TextField genreTextField;
+	@FXML
+	private TextField genreTextField;
 
-    @FXML
-    private TextField rankTextField;
+	@FXML
+	private TextField rankTextField;
 
-    @FXML
-    private TextField songTitleTextField;
+	@FXML
+	private TextField songTitleTextField;
 
-    @FXML
-    private TextField tagTextField;
+	@FXML
+	private TextField tagTextField;
 
-    @FXML
-    private TextField yearTextField;
-    
-    @FXML
-    private TextField lengthTextField;
+	@FXML
+	private TextField yearTextField;
 
-    @FXML
-    void handleCancelButton(ActionEvent event) {
-    	((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	@FXML
+	private TextField lengthTextField;
 
-    @FXML
-    void handleGenerateButton(ActionEvent event) throws IOException {
-    	gatherSeedInfo();
-    	generatePlaylist();
-    	loadPlaylistPage();
-    }
+	@FXML
+	void handleCancelButton(ActionEvent event) {
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void handleGenerateButton(ActionEvent event) throws IOException {
+		gatherSeedInfo();
+		generatePlaylist();
+		loadPlaylistPage();
+	}
 
 	public void loadPlaylistPage() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -86,36 +86,49 @@ public class GeneratePlaylistPage {
 	public void gatherSeedInfo() {
 		if (this.artistTextField != null) {
 			this.seedInfo.setArtistName(this.artistTextField.getText());
-		}if (this.songTitleTextField != null) {
+		}
+		if (this.songTitleTextField != null) {
 			this.seedInfo.setSongTitle(this.songTitleTextField.getText());
-		}if (this.genreTextField != null) {
+		}
+		if (this.genreTextField != null) {
 			this.seedInfo.setGenre(this.genreTextField.getText());
-		}if (this.tagTextField != null) {
+		}
+		if (this.tagTextField != null) {
 			this.seedInfo.setTag(new ArrayList<String>());
-		}if (this.lengthTextField != null) {
+		}
+		if (this.lengthTextField != null) {
 			this.seedInfo.setDesiredLength(this.lengthTextField.getText());
 		}
 	}
-	
+
 	public void generatePlaylist() {
-		for(Song song : songs) {
+		for (Song song : songs) {
 			if (song.getArtist().equals(seedInfo.getArtist())) {
 				generatedSongs.add(song);
+
 			}
-			if (song.getSongTitle().equals(seedInfo.getSongTitle())) {
-				generatedSongs.add(song);
+			if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
+				this.generatedSongs.add(song);
 			}
-			if (song.getGenre().equals(seedInfo.getGenre())) {
-				generatedSongs.add(song);
+			if (song.getGenre().equals(this.seedInfo.getGenre())) {
+				this.generatedSongs.add(song);
 			}
-			
+
 			for (String seedTag : seedInfo.getTag()) {
-			    if (song.getTag().contains(seedTag)) {
-			        generatedSongs.add(song);
-			    }
+				if (song.getTag().contains(seedTag)) {
+					generatedSongs.add(song);
+				}
 			}
 		}
+
 	}
+
+	/**
+	 * Binds the list to an outside list
+	 * 
+	 * @param songs the list to bind
+	 * @return true if successfully binded
+	 */
 
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
@@ -124,10 +137,11 @@ public class GeneratePlaylistPage {
 		this.songs = songs;
 		return true;
 	}
-	
+
 	void initialize() {
-		seedInfo = new SeedInfo();
-		generatedSongs = new ArrayList<Song>();
+
+		this.seedInfo = new SeedInfo();
+		this.generatedSongs = new ArrayList<Song>();
 		FXCollections.shuffle(songs);
 	}
 }

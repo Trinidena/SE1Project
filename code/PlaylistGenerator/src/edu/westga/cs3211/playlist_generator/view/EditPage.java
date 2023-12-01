@@ -71,7 +71,6 @@ public class EditPage {
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-				System.out.println("else");
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
@@ -88,7 +87,9 @@ public class EditPage {
 	 * 
 	 * @param songs is the list of Song objects to add
 	 * 
+	 * 
 	 * @return if the binding was successful
+	 *
 	 */
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
@@ -98,12 +99,19 @@ public class EditPage {
 		return true;
 	}
 
+	public void setSelectedSong(Song song) {
+		this.selectedSong = song;
+	}
+
 	@FXML
 	void initialize() {
 
 		this.editErrorLabel.setVisible(false);
 
 		if (this.selectedSong != null) {
+
+			System.out.println("Done");
+
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());
 
@@ -114,12 +122,6 @@ public class EditPage {
 			this.populateRankComboBox();
 
 		}
-
-	}
-
-	public void setSelectedSong(Song newSong) {
-
-		this.selectedSong = newSong;
 
 	}
 

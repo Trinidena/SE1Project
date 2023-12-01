@@ -46,7 +46,7 @@ public class Main extends Application {
 	 * @precondition none
 	 * @postcondition none
 	 * 
-	 * @param args command line arguments <we don't really use these>
+	 * @param args command line arguments (we don't really use these)
 	 */
 	public static void main(String[] args) {
 		Main.launch(args);
