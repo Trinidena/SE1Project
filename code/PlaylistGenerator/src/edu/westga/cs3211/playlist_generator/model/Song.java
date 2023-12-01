@@ -30,9 +30,6 @@ public class Song {
 
 	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
 			ArrayList<String> tags) {
-		if (songTitle == null || artist == null || genre == null) {
-			throw new IllegalArgumentException();
-		}
 
 		this.setSongTitle(songTitle);
 		this.setArtistName(artist);
