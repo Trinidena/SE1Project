@@ -3,7 +3,6 @@ package edu.westga.cs3211.playlist_generator.model;
 import java.util.Objects;
 
 import edu.westga.cs3211.playlist.resources.UI;
-import java.util.ArrayList;
 
 /**
  * Stores and manages information for a single Prescription.
@@ -18,7 +17,7 @@ public class Song {
 	private String album;
 	private int rank;
 	private int year;
-	private ArrayList<String> tags;
+	private String tags;
 
 	/**
 	 * Create a new song with the provided information.
@@ -32,8 +31,7 @@ public class Song {
 	 * @param year      the year the song came out
 	 */
 
-	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
-			ArrayList<String> tags) {
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year, String tags) {
 
 		this.setSongTitle(songTitle);
 		this.setArtistName(artist);
@@ -188,7 +186,7 @@ public class Song {
 	 * 
 	 * @param tags the list to be set
 	 */
-	public void setTag(ArrayList<String> tags) {
+	public void setTag(String tags) {
 		this.tags = tags;
 	}
 
@@ -197,7 +195,7 @@ public class Song {
 	 * 
 	 * @return the list of tags
 	 */
-	public ArrayList<String> getTag() {
+	public String getTags() {
 		return this.tags;
 
 	}

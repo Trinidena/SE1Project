@@ -71,6 +71,7 @@ public class EditPage {
 				this.editErrorLabel.setVisible(true);
 
 			} else {
+				System.out.println("else");
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
@@ -87,9 +88,7 @@ public class EditPage {
 	 * 
 	 * @param songs is the list of Song objects to add
 	 * 
-	 * 
 	 * @return if the binding was successful
-	 *
 	 */
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
