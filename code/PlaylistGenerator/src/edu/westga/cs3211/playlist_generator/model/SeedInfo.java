@@ -10,7 +10,7 @@ public class SeedInfo {
 	private String album;
 	private int rank;
 	private int year;
-	private ArrayList<String> tags;
+	private String tag;
 
 	private String desiredLength;
 
@@ -149,8 +149,8 @@ public class SeedInfo {
 	 * @return the list of tags
 	 */
 
-	public ArrayList<String> getTag() {
-		return this.tags;
+	public String getTag() {
+		return this.tag;
 	}
 
 	/**
@@ -159,8 +159,8 @@ public class SeedInfo {
 	 * @param tags the tag to set
 	 */
 
-	public void setTag(ArrayList<String> tags) {
-		this.tags = tags;
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	/**

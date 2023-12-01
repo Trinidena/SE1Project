@@ -196,7 +196,7 @@ public class Song {
 	 * 
 	 * @return the list of tags
 	 */
-	public String getTags() {
+	public String getTag() {
 		return this.tag;
 
 	}
