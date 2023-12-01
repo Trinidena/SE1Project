@@ -2,43 +2,46 @@ package edu.westga.cs3211.playlist_generator.view;
 
 import java.io.IOException;
 
-import edu.westga.cs3211.playlist_generator.Main;
 import edu.westga.cs3211.playlist_generator.model.Song;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class ConfirmationDialog {
 
 	private Song selectedSong;
-    @FXML
-    private Button noButton;
+	@FXML
+	private Button noButton;
 
-    @FXML
-    private Button yesButton;
+	@FXML
+	private Button yesButton;
 
-    private ObservableList<Song> songs;
-    
-    @FXML
-    void handleNoButton(ActionEvent event) {
-    	((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	private ObservableList<Song> songs;
 
-    @FXML
-    void handleYesButton(ActionEvent event) throws IOException {
-    	this.songs.remove(selectedSong);
-    	((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-    
-    public boolean bind(ObservableList<Song> songs, Song song) {
-		if (songs == null) {
+	@FXML
+	void handleNoButton(ActionEvent event) {
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void handleYesButton(ActionEvent event) throws IOException {
+		this.songs.remove(this.selectedSong);
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	/**
+	 * Binds the song list and selected song
+	 * 
+	 * @param songs the list of songs
+	 * @param song  the selected song
+	 * @return true if binding successful
+	 */
+	public boolean bind(ObservableList<Song> songs, Song song) {
+		if (songs == null || song == null) {
 			return false;
 		}
 		this.songs = songs;
@@ -46,8 +49,8 @@ public class ConfirmationDialog {
 		return true;
 	}
 
-    @FXML
-    void initialize() {
-    }
+	@FXML
+	void initialize() {
+	}
 
 }

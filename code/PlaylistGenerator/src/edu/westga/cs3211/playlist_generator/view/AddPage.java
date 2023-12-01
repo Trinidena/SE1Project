@@ -80,17 +80,11 @@ public class AddPage {
 
 			String comboString = this.addGenreComboBox.getValue().toString();
 
-			System.out.println(comboString);
-
 			Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(), comboString,
-					this.albumTextField.getText(), 
-					rank,
-					Integer.parseInt(this.yearTextField.getText()),
+					this.albumTextField.getText(), rank, Integer.parseInt(this.yearTextField.getText()),
 					new ArrayList<String>());
 
 			this.addedSong = song;
-
-			System.out.println(this.addedSong.getGenre());
 
 			this.setOptionalItems();
 

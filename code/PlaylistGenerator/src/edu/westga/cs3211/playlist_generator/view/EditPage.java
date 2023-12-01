@@ -86,10 +86,12 @@ public class EditPage {
 	 * Binds the data from the song object to the appropriate display fields.
 	 * 
 	 * @param songs is the list of Song objects to add
+	 * @param song  the selected song
 	 * 
 	 * @return if the binding was successful
+	 *
 	 */
-	public boolean bind(ObservableList<Song> songs) {
+	public boolean bind(ObservableList<Song> songs, Song song) {
 		if (songs == null) {
 			return false;
 		}
@@ -113,12 +115,6 @@ public class EditPage {
 			this.populateRankComboBox();
 
 		}
-
-	}
-
-	public void setSelectedSong(Song newSong) {
-
-		this.selectedSong = newSong;
 
 	}
 

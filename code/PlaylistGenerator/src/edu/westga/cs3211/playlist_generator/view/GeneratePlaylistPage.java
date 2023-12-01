@@ -1,7 +1,6 @@
 package edu.westga.cs3211.playlist_generator.view;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.westga.cs3211.playlist_generator.model.SeedInfo;
 import edu.westga.cs3211.playlist_generator.model.Song;
@@ -13,89 +12,100 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class GeneratePlaylistPage {
-	
+
 	private ObservableList<Song> songs;
-	
+
 	private ArrayList<Song> generatedSongs;
-	
+
 	private ArrayList<String> generatedTags;
-	
+
 	private SeedInfo seedInfo;
-    @FXML
-    private TextField albumTextField;
+	@FXML
+	private TextField albumTextField;
 
-    @FXML
-    private TextField artistTextField;
+	@FXML
+	private TextField artistTextField;
 
-    @FXML
-    private Button cancelButton;
+	@FXML
+	private Button cancelButton;
 
-    @FXML
-    private Button generateButton;
+	@FXML
+	private Button generateButton;
 
-    @FXML
-    private TextField genreTextField;
+	@FXML
+	private TextField genreTextField;
 
-    @FXML
-    private TextField rankTextField;
+	@FXML
+	private TextField rankTextField;
 
-    @FXML
-    private TextField songTitleTextField;
+	@FXML
+	private TextField songTitleTextField;
 
-    @FXML
-    private TextField tagTextField;
+	@FXML
+	private TextField tagTextField;
 
-    @FXML
-    private TextField yearTextField;
-    
-    @FXML
-    private TextField lengthTextField;
+	@FXML
+	private TextField yearTextField;
 
-    @FXML
-    void handleCancelButton(ActionEvent event) {
-    	((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	@FXML
+	private TextField lengthTextField;
 
-    @FXML
-    void handleGenerateButton(ActionEvent event) {
-    	gatherSeedInfo();
-    	generatePlaylist();
-    }
+	@FXML
+	void handleCancelButton(ActionEvent event) {
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void handleGenerateButton(ActionEvent event) {
+		this.gatherSeedInfo();
+		this.generatePlaylist();
+	}
 
 	private void gatherSeedInfo() {
 		if (this.artistTextField != null) {
 			this.seedInfo.setArtistName(this.artistTextField.getText());
-		}if (this.songTitleTextField != null) {
+		}
+		if (this.songTitleTextField != null) {
 			this.seedInfo.setSongTitle(this.songTitleTextField.getText());
-		}if (this.genreTextField != null) {
+		}
+		if (this.genreTextField != null) {
 			this.seedInfo.setGenre(this.genreTextField.getText());
-		}if (this.tagTextField != null) {
+		}
+		if (this.tagTextField != null) {
 			this.seedInfo.setTag(new ArrayList<String>());
-		}if (this.lengthTextField != null) {
+		}
+		if (this.lengthTextField != null) {
 			this.seedInfo.setDesiredLength(this.lengthTextField.getText());
 		}
 	}
-	
+
 	private void generatePlaylist() {
-		for(Song song : songs) {
-			if (song.getArtist().equals(seedInfo.getArtist())) {
-				generatedSongs.add(song);
+		for (Song song : this.songs) {
+			if (song.getArtist().equals(this.seedInfo.getArtist())) {
+				this.generatedSongs.add(song);
 			}
-			if (song.getSongTitle().equals(seedInfo.getSongTitle())) {
-				generatedSongs.add(song);
+			if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
+				this.generatedSongs.add(song);
 			}
-			if (song.getGenre().equals(seedInfo.getGenre())) {
-				generatedSongs.add(song);
+			if (song.getGenre().equals(this.seedInfo.getGenre())) {
+				this.generatedSongs.add(song);
 			}
-			
-			for (String seedTag : seedInfo.getTag()) {
-			    if (song.getTag().contains(seedTag)) {
-			        
-			    }
+
+			for (String seedTag : this.seedInfo.getTag()) {
+				if (song.getTag().contains(seedTag)) {
+
+				}
 			}
 		}
-		
+
 	}
+
+	/**
+	 * Binds the list to an outside list
+	 * 
+	 * @param songs the list to bind
+	 * @return true if successfully binded
+	 */
 
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
@@ -104,9 +114,9 @@ public class GeneratePlaylistPage {
 		this.songs = songs;
 		return true;
 	}
-	
+
 	void initialize() {
-		seedInfo = new SeedInfo();
-		generatedSongs = new ArrayList<Song>();
+		this.seedInfo = new SeedInfo();
+		this.generatedSongs = new ArrayList<Song>();
 	}
 }

@@ -26,6 +26,10 @@ public class Song {
 	 * @param songTitle is the title of the song
 	 * @param artist    is the owner of the song
 	 * @param genre     is the category of the song
+	 * @param album     the album the song comes from
+	 * @param rank      the rank of the song
+	 * @param tags      the list of tags
+	 * @param year      the year the song came out
 	 */
 
 	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
@@ -54,7 +58,7 @@ public class Song {
 	/**
 	 * Sets the song title
 	 * 
-	 * @param newTitle
+	 * @param newTitle the title to set
 	 */
 
 	public void setSongTitle(String newTitle) {
@@ -82,7 +86,7 @@ public class Song {
 	/**
 	 * Sets the artist name
 	 * 
-	 * @param newArtist
+	 * @param newArtist the artist name to set
 	 */
 
 	public void setArtistName(String newArtist) {
@@ -109,7 +113,7 @@ public class Song {
 	/**
 	 * Sets the genre
 	 * 
-	 * @param newGenre
+	 * @param newGenre the genre to set
 	 */
 
 	public void setGenre(String newGenre) {
@@ -132,7 +136,7 @@ public class Song {
 	/**
 	 * Sets the Album name
 	 * 
-	 * @param newAlbum
+	 * @param newAlbum the album name ti set
 	 */
 
 	public void setAlbum(String newAlbum) {
@@ -152,7 +156,7 @@ public class Song {
 	/**
 	 * Sets the rank
 	 * 
-	 * @param newRank
+	 * @param newRank the rank to set
 	 */
 
 	public void setRank(int newRank) {
@@ -171,15 +175,31 @@ public class Song {
 	/**
 	 * Sets the year
 	 * 
-	 * @param newYear
+	 * @param newYear the year to set
 	 */
 
 	public void setYear(int newYear) {
 		this.year = newYear;
 	}
 
+	/**
+	 * Sets the list of tags
+	 * 
+	 * 
+	 * @param tags the list to be set
+	 */
 	public void setTag(ArrayList<String> tags) {
 		this.tags = tags;
+	}
+
+	/**
+	 * gets the list of tags
+	 * 
+	 * @return the list of tags
+	 */
+	public ArrayList<String> getTag() {
+		return this.tags;
+
 	}
 
 	/**
@@ -198,8 +218,4 @@ public class Song {
 		return Objects.hash(this.songTitle, this.artist, this.album, this.year, this.genre);
 	}
 
-	public ArrayList<String> getTag() {
-		return tags;
-
-	}
 }
