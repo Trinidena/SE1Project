@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import edu.westga.cs3211.playlist_generator.Genre;
 import edu.westga.cs3211.playlist_generator.Main;
 import edu.westga.cs3211.playlist_generator.model.SeedInfo;
 import edu.westga.cs3211.playlist_generator.model.Song;
@@ -16,12 +17,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/** 
+/**
  * Class generates the playlist page where the generated playlist is shown
+ * 
  * @author Trinidad
  * @version 1.0
  */
@@ -50,7 +53,7 @@ public class GeneratePlaylistPage {
 	private Button generateButton;
 
 	@FXML
-	private TextField genreTextField;
+	private ComboBox<Genre> generateComboBox;
 
 	@FXML
 	private TextField rankTextField;
@@ -82,9 +85,10 @@ public class GeneratePlaylistPage {
 		}
 		this.loadPlaylistPage();
 	}
-	
+
 	/**
 	 * method loads the page the contains the generated playlist
+	 * 
 	 * @throws IOException
 	 */
 	public void loadPlaylistPage() throws IOException {
@@ -101,7 +105,7 @@ public class GeneratePlaylistPage {
 		page.bind(this.generatedSongs);
 		addTodoStage.show();
 	}
-	
+
 	/**
 	 * method gathers the seed info provided from the user to be used in generation
 	 */
@@ -115,8 +119,8 @@ public class GeneratePlaylistPage {
 			if (this.songTitleTextField != null) {
 				this.seedInfo.setSongTitle(this.songTitleTextField.getText());
 			}
-			if (this.genreTextField != null) {
-				this.seedInfo.setGenre(this.genreTextField.getText());
+			if (this.generateComboBox.getValue().toString() != null) {
+				this.seedInfo.setGenre(this.generateComboBox.getValue().toString());
 			}
 			if (this.tagTextField != null) {
 				this.seedInfo.setTag(this.tagTextField.getText());
@@ -132,14 +136,15 @@ public class GeneratePlaylistPage {
 	private void checkAllFieldsEmpty() {
 		if (this.artistTextField.getText() == null
 				|| this.artistTextField.getText().trim().isEmpty() && this.songTitleTextField.getText() == null
-				|| this.songTitleTextField.getText().trim().isEmpty() && this.genreTextField.getText() == null
-				|| this.genreTextField.getText().trim().isEmpty() && this.tagTextField.getText() == null
+				|| this.songTitleTextField.getText().trim().isEmpty()
+						&& this.generateComboBox.getValue().toString() == null
+				|| this.generateComboBox.getValue().toString().trim().isEmpty() && this.tagTextField.getText() == null
 				|| this.tagTextField.getText().trim().isEmpty() && this.lengthTextField.getText() == null
 				|| this.lengthTextField.getText().trim().isEmpty()) {
 			this.allFieldsAreEmpty = true;
 		}
 	}
-	
+
 	/**
 	 * method generates the playlist if none of the fields are empty
 	 */
@@ -170,8 +175,11 @@ public class GeneratePlaylistPage {
 		}
 	}
 
-	/** generates the playlist based on if all the fields are empty on the page
-	 * @param allFieldsAreEmpty is a boolean that is set when CheckAllFieldsEmpty() is called
+	/**
+	 * generates the playlist based on if all the fields are empty on the page
+	 * 
+	 * @param allFieldsAreEmpty is a boolean that is set when CheckAllFieldsEmpty()
+	 *                          is called
 	 */
 	public void generatePlaylist(boolean allFieldsAreEmpty) {
 		FXCollections.shuffle(this.songs);
@@ -219,5 +227,13 @@ public class GeneratePlaylistPage {
 	void initialize() {
 		this.seedInfo = new SeedInfo();
 		this.generatedSongs = new ArrayList<Song>();
+		this.populateGenreComboBox();
+	}
+
+	private void populateGenreComboBox() {
+
+		for (Genre currentGenre : Genre.values()) {
+			this.generateComboBox.getItems().add(currentGenre);
+		}
 	}
 }
