@@ -1,87 +1,115 @@
-//package edu.westga.cs3211.playlist_generator.tests;
-//
-//import static org.junit.Assert.*;
-//import org.junit.Test;
-//import edu.westga.cs3211.playlist_generator.model.Song;
-//
-//public class SongTest {
-//
-//	@Test
-//	public void testSongConstructor() {
-//		// Test valid constructor
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		assertEquals("Title", song.getSongTitle());
-//		assertEquals("Artist", song.getArtist());
-//		assertEquals("Genre", song.getGenre());
-//
-////		// Test constructor with null parameters
-////		assertThrows(IllegalArgumentException.class, () -> {
-////			new Song(null, "Artist", "Genre");
-////		});
-////
-////		assertThrows(IllegalArgumentException.class, () -> {
-////			new Song("Title", null, "Genre");
-////		});
-////
-////		assertThrows(IllegalArgumentException.class, () -> {
-////			new Song("Title", "Artist", null);
-////		});
-////
-////		// Test constructor with all null parameters
-////		assertThrows(IllegalArgumentException.class, () -> {
-////			new Song(null, null, null);
-////		});
-//	}
-//
-//	@Test
-//	public void testGetSongTitle() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		assertEquals("Title", song.getSongTitle());
-//	}
-//
-//	@Test
-//	public void testGetArtist() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		assertEquals("Artist", song.getArtist());
-//	}
-//
-//	@Test
-//	public void testGetGenre() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		assertEquals("Genre", song.getGenre());
-//	}
-//
-//	@Test
-//	public void testGetAlbum() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		// By default, the album is not set, expecting null
-//		assertNull(song.getAlbum());
-//	}
-//
-//	@Test
-//	public void testGetRank() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		// By default, the rank is not set, expecting null
-//		assertNull(song.getRank());
-//	}
-//
-//	@Test
-//	public void testGetYear() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		// By default, the year is not set, expecting null
-//		assertNull(song.getYear());
-//	}
-//
-//	@Test
-//	public void testGetTag() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		// By default, the tag is not set, expecting null
-//		assertNull(song.getTag());
-//	}
-//
-//	@Test
-//	public void testToString() {
-//		Song song = new Song("Title", "Artist", "Genre", "Tag");
-//		assertEquals("Title Artist Genre", song.toString());
-//	}
-//}
+package edu.westga.cs3211.playlist_generator.tests;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+import edu.westga.cs3211.playlist_generator.model.Song;
+
+public class SongTest {
+
+	@Test
+	public void testSongConstructor() {
+		// Test valid constructor
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "tag");
+		assertEquals("Title", song.getSongTitle());
+		assertEquals("Artist", song.getArtist());
+		assertEquals("Genre", song.getGenre());
+
+		// Test constructor with null parameters
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song(null, "Artist", "Genre", "Album", 0, 0, "tag");
+		});
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("Title", null, "Genre", "Album", 0, 0, "tag");
+		});
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("Title", "Artist", null, "Album", 0, 0, "tag");
+		});
+
+		// Test constructor with all null parameters
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song(null, null, null, "Album", 0, 0, "tag");
+		});
+
+		// Test constructor with empty title
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("", "Artist", "Genre", "Album", 0, 0, "tag");
+		});
+
+		// Test constructor with empty artist
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("Title", "", "Genre", "Album", 0, 0, "tag");
+		});
+
+		// Test constructor with too high year
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("Title", "Artist", "Genre", "Album", 0, 9999, "tag");
+		});
+
+		// Test constructor with too low year
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Song("Title", "Artist", "Genre", "Album", 0, 1, "tag");
+		});
+	}
+
+	@Test
+	public void testGetSongTitle() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+		assertEquals("Title", song.getSongTitle());
+	}
+
+	@Test
+	public void testGetArtist() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+		assertEquals("Artist", song.getArtist());
+	}
+
+	@Test
+	public void testGetGenre() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+		assertEquals("Genre", song.getGenre());
+	}
+
+	@Test
+	public void testGetAlbum() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+
+		assertEquals("Album", song.getAlbum());
+	}
+
+	@Test
+	public void testGetRank() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+
+		assertEquals(0, song.getRank());
+	}
+
+	@Test
+	public void testGetYear() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+		assertEquals(0, song.getYear());
+
+	}
+
+	@Test
+	public void testGetTag() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+
+		assertEquals("Tag", song.getTag());
+
+	}
+
+	@Test
+	public void testToString() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+
+		assertEquals("Title", song.toString());
+	}
+
+	@Test
+	public void testHashCode() {
+		Song song = new Song("Title", "Artist", "Genre", "Album", 0, 0, "Tag");
+		assertEquals(1972890172, song.hashCode());
+	}
+}

@@ -1,7 +1,7 @@
 package edu.westga.cs3211.playlist_generator.view;
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 import edu.westga.cs3211.playlist_generator.model.Song;
@@ -68,9 +68,9 @@ public class AddPage {
 	@FXML
 	void addSongButton(ActionEvent event) {
 
-		int rank = 0;
-
 		try {
+
+			int rank = 0;
 
 			var rankCheck = this.addRankComboBox.getValue();
 			if (rankCheck != null) {
@@ -82,11 +82,9 @@ public class AddPage {
 
 			Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(), comboString,
 					this.albumTextField.getText(), rank, Integer.parseInt(this.yearTextField.getText()),
-					new ArrayList<String>());
+					this.tagTextField.getText());
 
 			this.addedSong = song;
-
-			this.setOptionalItems();
 
 			if (!this.checkIfAdded()) {
 				this.songs.add(song);
@@ -94,11 +92,19 @@ public class AddPage {
 			} else {
 				this.addErrorLabel.setText("Song already exists");
 				this.addErrorLabel.setVisible(true);
+
 			}
+
+		} catch (
+
+		IllegalArgumentException iae) {
+			this.addErrorLabel.setText(iae.getLocalizedMessage());
+			this.addErrorLabel.setVisible(true);
 		} catch (NullPointerException npe) {
 			this.addErrorLabel.setText(UI.EMPTY_GENRE);
 			this.addErrorLabel.setVisible(true);
 		}
+
 	}
 
 	@FXML
@@ -115,17 +121,11 @@ public class AddPage {
 		this.populateRankComboBox();
 	}
 
-	private void setOptionalItems() {
-		String albumName = this.albumTextField.textProperty().get();
-
-		if (!albumName.isEmpty()) {
-			this.addedSong.setAlbum(albumName);
-		}
-	}
-
 	private boolean checkIfAdded() {
 		for (Song currentSong : this.songs) {
 			if (this.addedSong.hashCode() == currentSong.hashCode()) {
+				// note that songs that are identical except for tags are still considered
+				// identical because tags are based on your own thoughts
 				return true;
 			}
 		}

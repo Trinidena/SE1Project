@@ -21,8 +21,6 @@ import javafx.scene.control.TextField;
 
 public class EditPage {
 
-	private static final int NUMBER_OF_TIMES_A_SONG_CAN_BE_IN_THE_LIST = 1;
-
 	@FXML
 	private TextField editAlbumTextField;
 
@@ -63,20 +61,23 @@ public class EditPage {
 
 		try {
 
-			this.setData();
+			Song copySong = this.createCopySong();
 
-			if (this.checkIfAdded()) {
+			if (this.checkIfAdded(copySong)) {
 
 				this.editErrorLabel.setText("Song already exists");
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-
+				this.setData();
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
 
 		} catch (IllegalArgumentException iae) {
 			this.editErrorLabel.setText(iae.getLocalizedMessage());
+			this.editErrorLabel.setVisible(true);
+		} catch (NullPointerException npe) {
+			this.editErrorLabel.setText(UI.EMPTY_GENRE);
 			this.editErrorLabel.setVisible(true);
 		}
 
@@ -87,9 +88,7 @@ public class EditPage {
 	 * 
 	 * @param songs is the list of Song objects to add
 	 * 
-	 * 
 	 * @return if the binding was successful
-	 *
 	 */
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
@@ -98,6 +97,13 @@ public class EditPage {
 		this.songs = songs;
 		return true;
 	}
+
+	/**
+	 * sets the selected song
+	 * 
+	 * 
+	 * @param song the song to set
+	 */
 
 	public void setSelectedSong(Song song) {
 		this.selectedSong = song;
@@ -110,14 +116,14 @@ public class EditPage {
 
 		if (this.selectedSong != null) {
 
-			System.out.println("Done");
-
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());
 
 			this.editAlbumTextField.textProperty().set(this.selectedSong.getAlbum());
 
 			this.editYearTextField.textProperty().set(String.valueOf(this.selectedSong.getYear()));
+			this.editTagTextField1.textProperty().set(this.selectedSong.getTag());
+
 			this.populateGenreComboBox();
 			this.populateRankComboBox();
 
@@ -132,6 +138,7 @@ public class EditPage {
 		this.selectedSong.setSongTitle(this.editTitleTextField.textProperty().get());
 		this.selectedSong.setArtistName(this.editArtistTextField.textProperty().get());
 		this.selectedSong.setGenre(this.editGenreComboBox.getValue().toString());
+		this.selectedSong.setTag(this.editTagTextField1.textProperty().get());
 
 		String yearString = this.editYearTextField.textProperty().get();
 
@@ -153,16 +160,14 @@ public class EditPage {
 
 	}
 
-	private boolean checkIfAdded() {
-		int songCount = 0;
+	private boolean checkIfAdded(Song newSong) {
 
 		for (Song currentSong : this.songs) {
-			if (this.selectedSong.hashCode() == currentSong.hashCode()) {
-				songCount++;
+			if (newSong.hashCode() == currentSong.hashCode()) {
+				// note that songs that are identical except for tags are still considered
+				// identical because tags are based on your own thoughts
+				return true;
 			}
-		}
-		if (songCount > NUMBER_OF_TIMES_A_SONG_CAN_BE_IN_THE_LIST) {
-			return true;
 		}
 
 		return false;
@@ -180,6 +185,29 @@ public class EditPage {
 		for (int rank = 1; rank < UI.RANK_LIMIT; rank++) {
 			this.editRankComboBox.getItems().add(rank);
 		}
+	}
+
+	private Song createCopySong() {
+		var rankCheck = this.editRankComboBox.getValue();
+		int rank = 0;
+
+		String title = this.editTitleTextField.textProperty().get();
+		String artist = this.editArtistTextField.textProperty().get();
+		String genre = this.editGenreComboBox.getValue().toString();
+		String tag = this.editAlbumTextField.getText();
+
+		int year = Integer.parseInt(this.editYearTextField.textProperty().get());
+
+		if (rankCheck != null) {
+			rank = this.editRankComboBox.getValue();
+
+		}
+
+		String album = this.editAlbumTextField.textProperty().get();
+
+		Song newSong = new Song(title, artist, genre, album, rank, year, tag);
+
+		return newSong;
 	}
 
 }

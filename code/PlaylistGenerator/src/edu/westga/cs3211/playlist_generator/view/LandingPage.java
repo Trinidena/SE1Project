@@ -80,22 +80,6 @@ public class LandingPage {
 	@FXML
 	void handleGenerateButton(ActionEvent event) throws IOException {
 
-		if (this.songs.getItems().size() > 0) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource(Main.GENERATE_PLAYLIST_PAGE_FXML));
-			loader.load();
-			Parent parent = loader.getRoot();
-			Scene scene = new Scene(parent);
-			Stage addTodoStage = new Stage();
-			addTodoStage.setTitle(Main.TITLE);
-			addTodoStage.setScene(scene);
-			addTodoStage.initModality(Modality.APPLICATION_MODAL);
-			GeneratePlaylistPage page = loader.getController();
-			page.bind(this.songs.getItems());
-
-			addTodoStage.show();
-		}
-
 	}
 
 	// @FXML
@@ -150,8 +134,9 @@ public class LandingPage {
 	@FXML
 	void editButton(ActionEvent event) throws IOException {
 
-		if (this.songs.getItems().size() > 0) {
-			final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
+		final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
+
+		if (this.songs.getItems().size() > 0 && selectedSong != null) {
 
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(Main.EDIT_PAGE));

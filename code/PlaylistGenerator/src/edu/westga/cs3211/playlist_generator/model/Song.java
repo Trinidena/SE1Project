@@ -1,9 +1,10 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.time.LocalDate;
+
 import java.util.Objects;
 
 import edu.westga.cs3211.playlist.resources.UI;
-import java.util.ArrayList;
 
 /**
  * Stores and manages information for a single Prescription.
@@ -12,13 +13,14 @@ import java.util.ArrayList;
  * @version HW1
  */
 public class Song {
+	private static final int CUTOFF_YEAR = 999;
 	private String songTitle;
 	private String artist;
 	private String genre;
 	private String album;
 	private int rank;
 	private int year;
-	private ArrayList<String> tags;
+	private String tag;
 
 	/**
 	 * Create a new song with the provided information.
@@ -28,22 +30,24 @@ public class Song {
 	 * @param genre     is the category of the song
 	 * @param album     the album the song comes from
 	 * @param rank      the rank of the song
-	 * @param tags      the list of tags
+	 * @param tag       the tag
 	 * @param year      the year the song came out
 	 */
 
-	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
-			ArrayList<String> tags) {
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year, String tag) {
 
 		this.setSongTitle(songTitle);
 		this.setArtistName(artist);
 
 		this.setGenre(genre);
 
-		this.album = album;
-		this.rank = rank;
-		this.year = year;
-		this.tags = tags;
+		this.setYear(year);
+
+		this.setAlbum(album);
+		this.setRank(rank);
+
+		this.setTag(tag);
+
 	}
 
 	/**
@@ -179,6 +183,10 @@ public class Song {
 	 */
 
 	public void setYear(int newYear) {
+		if (newYear > LocalDate.now().getYear() || newYear < CUTOFF_YEAR && newYear != 0) {
+			throw new IllegalArgumentException(UI.INVALID_YEAR);
+		}
+
 		this.year = newYear;
 	}
 
@@ -188,8 +196,8 @@ public class Song {
 	 * 
 	 * @param tags the list to be set
 	 */
-	public void setTag(ArrayList<String> tags) {
-		this.tags = tags;
+	public void setTag(String tags) {
+		this.tag = tags;
 	}
 
 	/**
@@ -197,8 +205,8 @@ public class Song {
 	 * 
 	 * @return the list of tags
 	 */
-	public ArrayList<String> getTag() {
-		return this.tags;
+	public String getTag() {
+		return this.tag;
 
 	}
 
@@ -215,7 +223,7 @@ public class Song {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.songTitle, this.artist, this.album, this.year, this.genre);
+		return Objects.hash(this.songTitle, this.artist, this.genre, this.album, this.rank, this.year);
 	}
 
 }
