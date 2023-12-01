@@ -86,17 +86,21 @@ public class EditPage {
 	 * Binds the data from the song object to the appropriate display fields.
 	 * 
 	 * @param songs is the list of Song objects to add
-	 * @param song  the selected song
+	 * 
 	 * 
 	 * @return if the binding was successful
 	 *
 	 */
-	public boolean bind(ObservableList<Song> songs, Song song) {
+	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
 			return false;
 		}
 		this.songs = songs;
 		return true;
+	}
+
+	public void setSelectedSong(Song song) {
+		this.selectedSong = song;
 	}
 
 	@FXML
@@ -105,6 +109,9 @@ public class EditPage {
 		this.editErrorLabel.setVisible(false);
 
 		if (this.selectedSong != null) {
+
+			System.out.println("Done");
+
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());
 

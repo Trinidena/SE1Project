@@ -99,7 +99,6 @@ public class AddPage {
 			this.addErrorLabel.setText(UI.EMPTY_GENRE);
 			this.addErrorLabel.setVisible(true);
 		}
-
 	}
 
 	@FXML

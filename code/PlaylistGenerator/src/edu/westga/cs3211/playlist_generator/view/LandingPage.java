@@ -164,8 +164,10 @@ public class LandingPage {
 			addTodoStage.initModality(Modality.APPLICATION_MODAL);
 			EditPage editPage = loader.getController();
 
+			editPage.setSelectedSong(selectedSong);
+
 			editPage.initialize();
-			editPage.bind(this.songs.getItems(), selectedSong);
+			editPage.bind(this.songs.getItems());
 
 			addTodoStage.showAndWait();
 			this.songs.refresh();
