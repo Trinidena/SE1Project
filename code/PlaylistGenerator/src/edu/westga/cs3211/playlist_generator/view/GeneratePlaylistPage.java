@@ -71,9 +71,11 @@ public class GeneratePlaylistPage {
 
 	@FXML
 	void handleGenerateButton(ActionEvent event) throws IOException {
-		this.gatherSeedInfo();
-		this.generatePlaylist();
-		this.loadPlaylistPage();
+		gatherSeedInfo();
+		if (!allFieldsAreEmpty) {
+			generatePlaylist();
+		}
+		loadPlaylistPage();
 	}
 
 	public void loadPlaylistPage() throws IOException {
@@ -87,7 +89,7 @@ public class GeneratePlaylistPage {
 		addTodoStage.setScene(scene);
 		addTodoStage.initModality(Modality.APPLICATION_MODAL);
 		PlaylistPage page = loader.getController();
-		page.bind(this.songs);
+		page.bind(this.generatedSongs);
 		addTodoStage.show();
 	}
 
@@ -112,7 +114,7 @@ public class GeneratePlaylistPage {
 			}
 		}
 		else {
-			generatePlaylist(allFieldsAreEmpty);
+			generatePlaylist(true);
 		}
 	}
 
@@ -127,7 +129,7 @@ public class GeneratePlaylistPage {
 	}
 
 	public void generatePlaylist() {
-		while (this.generatedSongs.size() <= Integer.parseInt(this.lengthTextField.getText())) {
+		while (this.generatedSongs.size() <= (Integer.parseInt(this.lengthTextField.getText()))) {
 			FXCollections.shuffle(this.songs);
 			for (Song song : this.songs) {
 				if (song.getArtist().equals(this.seedInfo.getArtist())) {
@@ -160,32 +162,11 @@ public class GeneratePlaylistPage {
 		randomTargetLength = random.nextInt((PLAYLIST_MAX - PLAYLIST_MIN) + PLAYLIST_MIN);
 		while(count < randomTargetLength) {
 			for (Song song : this.songs) {
-				if (song.getArtist().equals(this.seedInfo.getArtist())) {
-					this.generatedSongs.add(song);
-					count++;
-				}
-				if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
-					this.generatedSongs.add(song);
-					count++;
-				}
-				if (song.getGenre().equals(this.seedInfo.getGenre())) {
-					this.generatedSongs.add(song);
-					count++;
-				}
-				// for (String seedTag : this.seedInfo.getTag()) {
-				if (song.getTag().equals(seedInfo.getTag())) {
-					this.generatedSongs.add(song);
-					count++;
-				}
+				generatedSongs.add(song);
+				count++;
 			}
 		}
-		
 		checkForDuplicateSongs();
-		while (Integer.parseInt(this.lengthTextField.getText()) > this.generatedSongs.size()) {
-			if (!generatedSongs.isEmpty()) {
-				generatedSongs.remove(generatedSongs.size() - 1);
-			}
-		}
 	}
 	/**
 	 * Binds the list to an outside list
