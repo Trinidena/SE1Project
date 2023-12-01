@@ -71,7 +71,6 @@ public class EditPage {
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-				System.out.println("else");
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}

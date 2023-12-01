@@ -39,8 +39,7 @@ public class AddPage {
 	private TextField tagTextField;
 	@FXML
 	private TextField albumTextField;
-	@FXML
-	private TextField rankTextField;
+
 	@FXML
 	private TextField yearTextField;
 
@@ -69,15 +68,29 @@ public class AddPage {
 	@FXML
 	void addSongButton(ActionEvent event) {
 
+		int rank = 0;
+
 		try {
+
+			var rankCheck = this.addRankComboBox.getValue();
+			if (rankCheck != null) {
+				rank = this.addRankComboBox.getValue();
+
+			}
 
 			String comboString = this.addGenreComboBox.getValue().toString();
 
+			System.out.println(comboString);
+
 			Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(), comboString,
-					this.albumTextField.getText(), Integer.parseInt(this.rankTextField.getText()),
-					Integer.parseInt(this.yearTextField.getText()), new ArrayList<String>());
+					this.albumTextField.getText(), 
+					rank,
+					Integer.parseInt(this.yearTextField.getText()),
+					new ArrayList<String>());
 
 			this.addedSong = song;
+
+			System.out.println(this.addedSong.getGenre());
 
 			this.setOptionalItems();
 
@@ -88,9 +101,6 @@ public class AddPage {
 				this.addErrorLabel.setText("Song already exists");
 				this.addErrorLabel.setVisible(true);
 			}
-		} catch (IllegalArgumentException iae) {
-			this.addErrorLabel.setText(iae.getLocalizedMessage());
-			this.addErrorLabel.setVisible(true);
 		} catch (NullPointerException npe) {
 			this.addErrorLabel.setText(UI.EMPTY_GENRE);
 			this.addErrorLabel.setVisible(true);
@@ -106,6 +116,7 @@ public class AddPage {
 	@FXML
 	void initialize() {
 		this.addErrorLabel.setVisible(false);
+		this.yearTextField.textProperty().set("0");
 		this.populateGenreComboBox();
 		this.populateRankComboBox();
 	}
