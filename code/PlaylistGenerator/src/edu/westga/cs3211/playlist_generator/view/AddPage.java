@@ -1,6 +1,7 @@
 package edu.westga.cs3211.playlist_generator.view;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3211.playlist_generator.model.Song;
@@ -32,10 +33,8 @@ public class AddPage {
 	private TextField tagTextField;
 	@FXML
 	private TextField albumTextField;
-
 	@FXML
 	private TextField rankTextField;
-
 	@FXML
 	private TextField yearTextField;
 
@@ -63,8 +62,13 @@ public class AddPage {
 		Song song = new Song(this.songTitleTextField.getText(),
 			 this.artistTextField.getText(), this.genreTextField.getText(), 
 			 this.albumTextField.getText(), Integer.parseInt(this.rankTextField.getText()),
-			 Integer.parseInt(this.yearTextField.getText()), this.tagTextField.getText());
-	
+			 Integer.parseInt(this.yearTextField.getText()), new ArrayList<String>());
+
+
+		this.addedSong = song;
+
+		this.setOptionalItems();
+
 		this.songs.add(song);
 		
 		((Node) (event.getSource())).getScene().getWindow().hide();

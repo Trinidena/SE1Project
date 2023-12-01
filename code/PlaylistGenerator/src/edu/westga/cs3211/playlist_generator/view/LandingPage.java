@@ -129,7 +129,8 @@ public String formatSongDetails(Song selectedSong) {
     			.concat("\n").concat("Album: ").concat(selectedSong.getAlbum())
     			.concat("\n").concat("Rank: ").concat(Integer.toString(selectedSong.getRank()))
     			.concat("\n").concat("Year: ").concat(Integer.toString(selectedSong.getYear()))
-    			.concat("\n").concat("Tag: ").concat(selectedSong.getTag());
+    			.concat("\n").concat("Tag: ").concat(String.join(", ", selectedSong.getTag()));
+
 		return formattedSongDetails;
 	}
 
