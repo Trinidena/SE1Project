@@ -1,5 +1,7 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.util.ArrayList;
+
 /**
  * Stores and manages information for a single Prescription.
  * 
@@ -13,7 +15,7 @@ public class Song {
 	private String album;
 	private int rank;
 	private int year;
-	private String tag;
+	private ArrayList<String> tags;
 
 	/**
 	 * Create a new song with the provided information.
@@ -22,14 +24,14 @@ public class Song {
 	 * @param artist    is the owner of the song
 	 * @param genre     is the category of the song
 	 */
-	public Song(String songTitle, String artist, String genre, String tag) {
+	public Song(String songTitle, String artist, String genre, ArrayList<String> tags) {
 		if (songTitle == null || artist == null || genre == null) {
 			throw new IllegalArgumentException();
 		}
 		this.songTitle = songTitle;
 		this.artist = artist;
 		this.genre = genre;
-		this.tag = tag;
+		this.tags = tags;
 	}
 
 	/**
@@ -145,6 +147,10 @@ public class Song {
 	public void setYear(int newYear) {
 		this.year = newYear;
 	}
+	
+	public void setTag(ArrayList<String> tags) {
+		this.tags = tags;
+	}
 
 	/**
 	 * Convert object to a String representation.
@@ -153,10 +159,10 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return this.songTitle + "		" + this.tag;
+		return this.songTitle + "		" + this.tags;
 	}
 
-	public String getTag() {
-		return tag;
+	public ArrayList<String> getTag() {
+		return tags;
 	}
 }

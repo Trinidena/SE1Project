@@ -125,7 +125,7 @@ public class LandingPage {
 		String formattedSongDetails = "";
 		formattedSongDetails = formattedSongDetails.concat("Song: ").concat(selectedSong.getSongTitle()).concat("\n")
 				.concat("Artist: ").concat(selectedSong.getArtist()).concat("\n").concat("Genre: ")
-				.concat(selectedSong.getGenre()).concat("\n").concat("Tag: ").concat(selectedSong.getTag());
+				.concat(selectedSong.getGenre()).concat("\n").concat("Tag: ").concat(String.join(", ", selectedSong.getTag()));
 		return formattedSongDetails;
 	}
 
