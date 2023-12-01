@@ -1,16 +1,23 @@
 package edu.westga.cs3211.playlist_generator.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3211.playlist_generator.Main;
 import edu.westga.cs3211.playlist_generator.model.SeedInfo;
 import edu.westga.cs3211.playlist_generator.model.Song;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class GeneratePlaylistPage {
 	
@@ -57,12 +64,28 @@ public class GeneratePlaylistPage {
     }
 
     @FXML
-    void handleGenerateButton(ActionEvent event) {
+    void handleGenerateButton(ActionEvent event) throws IOException {
     	gatherSeedInfo();
     	generatePlaylist();
+    	loadPlaylistPage();
     }
 
-	private void gatherSeedInfo() {
+	public void loadPlaylistPage() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource(Main.PLAYLIST_PAGE_FXML));
+		loader.load();
+		Parent parent = loader.getRoot();
+		Scene scene = new Scene(parent);
+		Stage addTodoStage = new Stage();
+		addTodoStage.setTitle(Main.TITLE);
+		addTodoStage.setScene(scene);
+		addTodoStage.initModality(Modality.APPLICATION_MODAL);
+		PlaylistPage page = loader.getController();
+		page.bind(this.songs);
+		addTodoStage.show();
+	}
+
+	public void gatherSeedInfo() {
 		if (this.artistTextField != null) {
 			this.seedInfo.setArtistName(this.artistTextField.getText());
 		}if (this.songTitleTextField != null) {
@@ -76,7 +99,7 @@ public class GeneratePlaylistPage {
 		}
 	}
 	
-	private void generatePlaylist() {
+	public void generatePlaylist() {
 		for(Song song : songs) {
 			if (song.getArtist().equals(seedInfo.getArtist())) {
 				generatedSongs.add(song);
@@ -90,11 +113,10 @@ public class GeneratePlaylistPage {
 			
 			for (String seedTag : seedInfo.getTag()) {
 			    if (song.getTag().contains(seedTag)) {
-			        
+			        generatedSongs.add(song);
 			    }
 			}
 		}
-		
 	}
 
 	public boolean bind(ObservableList<Song> songs) {
