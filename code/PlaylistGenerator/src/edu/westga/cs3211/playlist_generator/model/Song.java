@@ -24,15 +24,19 @@ public class Song {
 	 * @param artist    is the owner of the song
 	 * @param genre     is the category of the song
 	 */
-	public Song(String songTitle, String artist, String genre, ArrayList<String> tags) {
-		if (songTitle == null || artist == null || genre == null) {
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year, ArrayList<String> tags) {
+		if(songTitle == null || artist == null || genre == null) {
 			throw new IllegalArgumentException();
 		}
-		this.songTitle = songTitle;
-		this.artist = artist;
-		this.genre = genre;
-		this.tags = tags;
-	}
+
+	this.songTitle = songTitle;
+	this.artist = artist;
+	this.genre = genre;
+	this.album = album;
+	this.rank = rank;
+	this.year = year;
+	this.tags = tags;
+}
 
 	/**
 	 * name of song
@@ -159,7 +163,8 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return this.songTitle + "		" + this.tags;
+		return this.songTitle;
+
 	}
 
 	public ArrayList<String> getTag() {
