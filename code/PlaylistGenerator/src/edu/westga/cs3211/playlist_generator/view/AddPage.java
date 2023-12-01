@@ -86,8 +86,6 @@ public class AddPage {
 
 			this.addedSong = song;
 
-			this.setOptionalItems();
-
 			if (!this.checkIfAdded()) {
 				this.songs.add(song);
 				((Node) (event.getSource())).getScene().getWindow().hide();
@@ -113,14 +111,6 @@ public class AddPage {
 		this.yearTextField.textProperty().set("0");
 		this.populateGenreComboBox();
 		this.populateRankComboBox();
-	}
-
-	private void setOptionalItems() {
-		String albumName = this.albumTextField.textProperty().get();
-
-		if (!albumName.isEmpty()) {
-			this.addedSong.setAlbum(albumName);
-		}
 	}
 
 	private boolean checkIfAdded() {

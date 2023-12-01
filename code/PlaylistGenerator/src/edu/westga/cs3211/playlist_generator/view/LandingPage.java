@@ -150,8 +150,9 @@ public class LandingPage {
 	@FXML
 	void editButton(ActionEvent event) throws IOException {
 
-		if (this.songs.getItems().size() > 0) {
-			final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
+		final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
+
+		if (this.songs.getItems().size() > 0 && selectedSong != null) {
 
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(Main.EDIT_PAGE));

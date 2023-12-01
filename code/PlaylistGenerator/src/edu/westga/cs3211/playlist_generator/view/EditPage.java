@@ -99,6 +99,13 @@ public class EditPage {
 		return true;
 	}
 
+	/**
+	 * sets the selected song
+	 * 
+	 * 
+	 * @param song the song to set
+	 */
+
 	public void setSelectedSong(Song song) {
 		this.selectedSong = song;
 	}
@@ -109,8 +116,6 @@ public class EditPage {
 		this.editErrorLabel.setVisible(false);
 
 		if (this.selectedSong != null) {
-
-			System.out.println("Done");
 
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());

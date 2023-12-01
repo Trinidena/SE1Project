@@ -63,9 +63,9 @@ public class GeneratePlaylistPage {
 
 	@FXML
 	void handleGenerateButton(ActionEvent event) throws IOException {
-		gatherSeedInfo();
-		generatePlaylist();
-		loadPlaylistPage();
+		this.gatherSeedInfo();
+		this.generatePlaylist();
+		this.loadPlaylistPage();
 	}
 
 	public void loadPlaylistPage() throws IOException {
@@ -102,9 +102,9 @@ public class GeneratePlaylistPage {
 	}
 
 	public void generatePlaylist() {
-		for (Song song : songs) {
-			if (song.getArtist().equals(seedInfo.getArtist())) {
-				generatedSongs.add(song);
+		for (Song song : this.songs) {
+			if (song.getArtist().equals(this.seedInfo.getArtist())) {
+				this.generatedSongs.add(song);
 
 			}
 			if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
@@ -114,9 +114,9 @@ public class GeneratePlaylistPage {
 				this.generatedSongs.add(song);
 			}
 
-			for (String seedTag : seedInfo.getTag()) {
+			for (String seedTag : this.seedInfo.getTag()) {
 				if (song.getTag().contains(seedTag)) {
-					generatedSongs.add(song);
+					this.generatedSongs.add(song);
 				}
 			}
 		}
@@ -142,6 +142,6 @@ public class GeneratePlaylistPage {
 
 		this.seedInfo = new SeedInfo();
 		this.generatedSongs = new ArrayList<Song>();
-		FXCollections.shuffle(songs);
+		FXCollections.shuffle(this.songs);
 	}
 }
