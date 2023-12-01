@@ -27,4 +27,7 @@ public class UI {
 
 	public static final int RANK_LIMIT = 6;
 
+	public static final String INVALID_YEAR = "Year cannot be greater than" + '\n' + "the current year or less than"
+			+ '\n' + "1000";
+
 }

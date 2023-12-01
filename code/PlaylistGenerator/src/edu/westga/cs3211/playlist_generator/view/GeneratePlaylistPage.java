@@ -152,7 +152,7 @@ public class GeneratePlaylistPage {
 			}
 		}
 	}
-	
+
 	public void generatePlaylist(boolean allFieldsAreEmpty) {
 		FXCollections.shuffle(this.songs);
 		Random random = new Random();
@@ -187,7 +187,6 @@ public class GeneratePlaylistPage {
 			}
 		}
 	}
-
 	/**
 	 * Binds the list to an outside list
 	 * 
@@ -202,18 +201,18 @@ public class GeneratePlaylistPage {
 		this.songs = songs;
 		return true;
 	}
-	
+
 	private void checkForDuplicateSongs() {
 		for (int i = 0; i < this.generatedSongs.size(); i++) {
-            Song currentSong = this.generatedSongs.get(i);
-            for (int j = i + 1; j < this.generatedSongs.size(); j++) {
-                Song nextSong = this.generatedSongs.get(j);
-                if (currentSong.equals(nextSong)) {
-                	this.generatedSongs.remove(j);
-                    j--;
-                }
-            }
-        }
+			Song currentSong = this.generatedSongs.get(i);
+			for (int j = i + 1; j < this.generatedSongs.size(); j++) {
+				Song nextSong = this.generatedSongs.get(j);
+				if (currentSong.equals(nextSong)) {
+					this.generatedSongs.remove(j);
+					j--;
+				}
+			}
+		}
 	}
 
 	@FXML
