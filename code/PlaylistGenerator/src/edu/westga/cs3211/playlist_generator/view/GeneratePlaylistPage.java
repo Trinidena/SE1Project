@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.westga.cs3211.playlist_generator.model.SeedInfo;
 import edu.westga.cs3211.playlist_generator.model.Song;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +18,6 @@ public class GeneratePlaylistPage {
 	private ObservableList<Song> songs;
 	
 	private ArrayList<Song> generatedSongs;
-	
-	private ArrayList<String> generatedTags;
 	
 	private SeedInfo seedInfo;
     @FXML
@@ -90,7 +89,7 @@ public class GeneratePlaylistPage {
 			
 			for (String seedTag : seedInfo.getTag()) {
 			    if (song.getTag().contains(seedTag)) {
-			        
+			        generatedSongs.add(song);
 			    }
 			}
 		}
@@ -108,5 +107,6 @@ public class GeneratePlaylistPage {
 	void initialize() {
 		seedInfo = new SeedInfo();
 		generatedSongs = new ArrayList<Song>();
+		FXCollections.shuffle(songs);
 	}
 }
