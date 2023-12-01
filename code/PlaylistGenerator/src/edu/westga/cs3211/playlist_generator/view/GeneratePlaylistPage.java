@@ -2,6 +2,7 @@ package edu.westga.cs3211.playlist_generator.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import edu.westga.cs3211.playlist_generator.Main;
 import edu.westga.cs3211.playlist_generator.model.SeedInfo;
@@ -21,11 +22,16 @@ import javafx.stage.Stage;
 
 public class GeneratePlaylistPage {
 
+	private static final int PLAYLIST_MAX = 15;
+	private static final int PLAYLIST_MIN = 10;
+
 	private ObservableList<Song> songs;
 
 	private ArrayList<Song> generatedSongs;
 
 	private SeedInfo seedInfo;
+	
+	private int randomTargetLength;
 	@FXML
 	private TextField albumTextField;
 
@@ -56,6 +62,8 @@ public class GeneratePlaylistPage {
 	@FXML
 	private TextField lengthTextField;
 
+	private boolean allFieldsAreEmpty;
+
 	@FXML
 	void handleCancelButton(ActionEvent event) {
 		((Node) (event.getSource())).getScene().getWindow().hide();
@@ -84,37 +92,55 @@ public class GeneratePlaylistPage {
 	}
 
 	public void gatherSeedInfo() {
-		if (this.artistTextField != null) {
-			this.seedInfo.setArtistName(this.artistTextField.getText());
+		checkAllFieldsEmpty();
+		
+		if (!allFieldsAreEmpty) {
+			if (this.artistTextField != null) {
+				this.seedInfo.setArtistName(this.artistTextField.getText());
+			}
+			if (this.songTitleTextField != null) {
+				this.seedInfo.setSongTitle(this.songTitleTextField.getText());
+			}
+			if (this.genreTextField != null) {
+				this.seedInfo.setGenre(this.genreTextField.getText());
+			}
+			if (this.tagTextField != null) {
+				this.seedInfo.setTag(this.tagTextField.getText());
+			}
+			if (this.lengthTextField != null) {
+				this.seedInfo.setDesiredLength(this.lengthTextField.getText());
+			}
 		}
-		if (this.songTitleTextField != null) {
-			this.seedInfo.setSongTitle(this.songTitleTextField.getText());
-		}
-		if (this.genreTextField != null) {
-			this.seedInfo.setGenre(this.genreTextField.getText());
-		}
-		if (this.tagTextField != null) {
-			this.seedInfo.setTag(new ArrayList<String>());
-		}
-		if (this.lengthTextField != null) {
-			this.seedInfo.setDesiredLength(this.lengthTextField.getText());
+		else {
+			generatePlaylist(allFieldsAreEmpty);
 		}
 	}
 
-	public void generatePlaylist() {
+	private void checkAllFieldsEmpty() {
+		if (this.artistTextField.getText() == null || this.artistTextField.getText().trim().isEmpty()
+				&& this.songTitleTextField.getText() == null || this.songTitleTextField.getText().trim().isEmpty()
+				&& this.genreTextField.getText() == null || this.genreTextField.getText().trim().isEmpty()
+				&& this.tagTextField.getText() == null || this.tagTextField.getText().trim().isEmpty()
+				&& this.lengthTextField.getText() == null || this.lengthTextField.getText().trim().isEmpty()) {
+				this.allFieldsAreEmpty = true;
+			}
+	}
 
-		for (Song song : this.songs) {
-			if (song.getArtist().equals(this.seedInfo.getArtist())) {
-				this.generatedSongs.add(song);
-			}
-			if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
-				this.generatedSongs.add(song);
-			}
-			if (song.getGenre().equals(this.seedInfo.getGenre())) {
-				this.generatedSongs.add(song);
-			}
-			for (String seedTag : this.seedInfo.getTag()) {
-				if (song.getTags().contains(seedTag)) {
+	public void generatePlaylist() {
+		while (this.generatedSongs.size() <= Integer.parseInt(this.lengthTextField.getText())) {
+			FXCollections.shuffle(this.songs);
+			for (Song song : this.songs) {
+				if (song.getArtist().equals(this.seedInfo.getArtist())) {
+					this.generatedSongs.add(song);
+				}
+				if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
+					this.generatedSongs.add(song);
+				}
+				if (song.getGenre().equals(this.seedInfo.getGenre())) {
+					this.generatedSongs.add(song);
+				}
+				// for (String seedTag : this.seedInfo.getTag()) {
+				if (song.getTag().equals(seedInfo.getTag())) {
 					this.generatedSongs.add(song);
 				}
 			}
@@ -127,6 +153,40 @@ public class GeneratePlaylistPage {
 		}
 	}
 
+	public void generatePlaylist(boolean allFieldsAreEmpty) {
+		FXCollections.shuffle(this.songs);
+		Random random = new Random();
+		int count = 0;
+		randomTargetLength = random.nextInt((PLAYLIST_MAX - PLAYLIST_MIN) + PLAYLIST_MIN);
+		while(count < randomTargetLength) {
+			for (Song song : this.songs) {
+				if (song.getArtist().equals(this.seedInfo.getArtist())) {
+					this.generatedSongs.add(song);
+					count++;
+				}
+				if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
+					this.generatedSongs.add(song);
+					count++;
+				}
+				if (song.getGenre().equals(this.seedInfo.getGenre())) {
+					this.generatedSongs.add(song);
+					count++;
+				}
+				// for (String seedTag : this.seedInfo.getTag()) {
+				if (song.getTag().equals(seedInfo.getTag())) {
+					this.generatedSongs.add(song);
+					count++;
+				}
+			}
+		}
+		
+		checkForDuplicateSongs();
+		while (Integer.parseInt(this.lengthTextField.getText()) > this.generatedSongs.size()) {
+			if (!generatedSongs.isEmpty()) {
+				generatedSongs.remove(generatedSongs.size() - 1);
+			}
+		}
+	}
 	/**
 	 * Binds the list to an outside list
 	 * 
@@ -155,9 +215,9 @@ public class GeneratePlaylistPage {
 		}
 	}
 
+	@FXML
 	void initialize() {
 		this.seedInfo = new SeedInfo();
 		this.generatedSongs = new ArrayList<Song>();
-		FXCollections.shuffle(this.songs);
 	}
 }
