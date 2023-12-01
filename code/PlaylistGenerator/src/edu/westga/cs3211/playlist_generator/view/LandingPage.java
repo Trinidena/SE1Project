@@ -98,45 +98,51 @@ public class LandingPage {
 
 	}
 
-//	@FXML
-//	void displaySong(MouseEvent event) throws IOException {
-//		final Song selectedItem = this.songs.getSelectionModel().getSelectedItem();
-//		if (selectedItem != null) {
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(Main.class.getResource(Main.DISPLAY_PAGE));
-//			loader.load();
-//			Parent parent = loader.getRoot();
-//			Scene scene = new Scene(parent);
-//			Stage addTodoStage = new Stage();
-//			addTodoStage.setTitle(Main.TITLE);
-//			addTodoStage.setScene(scene);
-//			addTodoStage.initModality(Modality.APPLICATION_MODAL);
-//			DisplayPage displayPage = loader.getController();
-//			displayPage.bind(selectedItem);
-//			addTodoStage.show();
-//		}
-//	}
+	// @FXML
+	// void displaySong(MouseEvent event) throws IOException {
+	// final Song selectedItem = this.songs.getSelectionModel().getSelectedItem();
+	// if (selectedItem != null) {
+	// FXMLLoader loader = new FXMLLoader();
+	// loader.setLocation(Main.class.getResource(Main.DISPLAY_PAGE));
+	// loader.load();
+	// Parent parent = loader.getRoot();
+	// Scene scene = new Scene(parent);
+	// Stage addTodoStage = new Stage();
+	// addTodoStage.setTitle(Main.TITLE);
+	// addTodoStage.setScene(scene);
+	// addTodoStage.initModality(Modality.APPLICATION_MODAL);
+	// DisplayPage displayPage = loader.getController();
+	// displayPage.bind(selectedItem);
+	// addTodoStage.show();
+	// }
+	// }
 
 	@FXML
 	void displaySongDetails(MouseEvent event) throws IOException {
 		if (this.songs.getItems().size() > 0) {
 			final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
 			this.songDetailsTextArea.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-			this.songDetailsTextArea.setText(formatSongDetails(selectedSong));
+			this.songDetailsTextArea.setText(this.formatSongDetails(selectedSong));
 		}
 
 	}
 
-public String formatSongDetails(Song selectedSong) {
-    	
-    	String formattedSongDetails = "";
-    	formattedSongDetails = formattedSongDetails.concat("Song: ").concat(selectedSong.getSongTitle())
-    			.concat("\n").concat("Artist: ").concat(selectedSong.getArtist())
-    			.concat("\n").concat("Genre: ").concat(selectedSong.getGenre())
-    			.concat("\n").concat("Album: ").concat(selectedSong.getAlbum())
-    			.concat("\n").concat("Rank: ").concat(Integer.toString(selectedSong.getRank()))
-    			.concat("\n").concat("Year: ").concat(Integer.toString(selectedSong.getYear()))
-    			.concat("\n").concat("Tag: ").concat(String.join(", ", selectedSong.getTag()));
+	/**
+	 * Formats the details to be displayed
+	 * 
+	 * 
+	 * @param selectedSong the selected song
+	 * @return the formatted song details
+	 */
+	public String formatSongDetails(Song selectedSong) {
+
+		String formattedSongDetails = "";
+		formattedSongDetails = formattedSongDetails.concat("Song: ").concat(selectedSong.getSongTitle()).concat("\n")
+				.concat("Artist: ").concat(selectedSong.getArtist()).concat("\n").concat("Genre: ")
+				.concat(selectedSong.getGenre()).concat("\n").concat("Album: ").concat(selectedSong.getAlbum())
+				.concat("\n").concat("Rank: ").concat(Integer.toString(selectedSong.getRank())).concat("\n")
+				.concat("Year: ").concat(Integer.toString(selectedSong.getYear())).concat("\n").concat("Tag: ")
+				.concat(String.join(", ", selectedSong.getTag()));
 
 		return formattedSongDetails;
 	}
@@ -172,8 +178,8 @@ public String formatSongDetails(Song selectedSong) {
 
 	@FXML
 	void initialize() {
-		songs.setStyle("-fx-font-size: 1.5em;");
-		songs.setStyle("-fx-font: normal bold 20 'Verdana'");
-		songDetailsTextArea.setEditable(false);
+		this.songs.setStyle("-fx-font-size: 1.5em;");
+		this.songs.setStyle("-fx-font: normal bold 20 'Verdana'");
+		this.songDetailsTextArea.setEditable(false);
 	}
 }
