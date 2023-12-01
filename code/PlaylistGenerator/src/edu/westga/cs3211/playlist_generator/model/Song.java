@@ -22,15 +22,18 @@ public class Song {
 	 * @param artist    is the owner of the song
 	 * @param genre     is the category of the song
 	 */
-	public Song(String songTitle, String artist, String genre, String tag) {
-		if (songTitle == null || artist == null || genre == null) {
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year, String tag) {
+		if(songTitle == null || artist == null || genre == null) {
 			throw new IllegalArgumentException();
-		}
-		this.songTitle = songTitle;
-		this.artist = artist;
-		this.genre = genre;
-		this.tag = tag;
 	}
+	this.songTitle = songTitle;
+	this.artist = artist;
+	this.genre = genre;
+	this.album = album;
+	this.rank = rank;
+	this.year = year;
+	this.tag = tag;
+}
 
 	/**
 	 * name of song
@@ -153,7 +156,7 @@ public class Song {
 	 */
 	@Override
 	public String toString() {
-		return this.songTitle + "		" + this.tag;
+		return this.songTitle;
 	}
 
 	public String getTag() {

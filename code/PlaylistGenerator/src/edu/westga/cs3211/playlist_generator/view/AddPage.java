@@ -60,15 +60,13 @@ public class AddPage {
 
 	@FXML
 	void addSongButton(ActionEvent event) {
-		Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(),
-				this.genreTextField.getText(), this.tagTextField.getText());
-
-		this.addedSong = song;
-
-		this.setOptionalItems();
-
+		Song song = new Song(this.songTitleTextField.getText(),
+			 this.artistTextField.getText(), this.genreTextField.getText(), 
+			 this.albumTextField.getText(), Integer.parseInt(this.rankTextField.getText()),
+			 Integer.parseInt(this.yearTextField.getText()), this.tagTextField.getText());
+	
 		this.songs.add(song);
-
+		
 		((Node) (event.getSource())).getScene().getWindow().hide();
 
 	}
