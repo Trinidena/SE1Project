@@ -18,7 +18,7 @@ public class Song {
 	private String album;
 	private int rank;
 	private int year;
-	private ArrayList<String> tags;
+	private ArrayList<String> tags = new ArrayList<String>();
 
 	/**
 	 * Create a new song with the provided information.
@@ -33,7 +33,7 @@ public class Song {
 	 */
 
 	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
-			ArrayList<String> tags) {
+			String tag) {
 
 		this.setSongTitle(songTitle);
 		this.setArtistName(artist);
@@ -43,7 +43,7 @@ public class Song {
 		this.album = album;
 		this.rank = rank;
 		this.year = year;
-		this.tags = tags;
+		this.tags.add(tag);
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class Song {
 	 * 
 	 * @param tags the list to be set
 	 */
-	public void setTag(ArrayList<String> tags) {
+	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
 
@@ -197,7 +197,7 @@ public class Song {
 	 * 
 	 * @return the list of tags
 	 */
-	public ArrayList<String> getTag() {
+	public ArrayList<String> getTags() {
 		return this.tags;
 
 	}

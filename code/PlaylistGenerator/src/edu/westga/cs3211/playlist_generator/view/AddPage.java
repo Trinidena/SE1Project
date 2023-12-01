@@ -77,12 +77,12 @@ public class AddPage {
 				rank = this.addRankComboBox.getValue();
 
 			}
-
+			
 			String comboString = this.addGenreComboBox.getValue().toString();
 
 			Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(), comboString,
 					this.albumTextField.getText(), rank, Integer.parseInt(this.yearTextField.getText()),
-					new ArrayList<String>());
+					this.tagTextField.getText());
 
 			this.addedSong = song;
 

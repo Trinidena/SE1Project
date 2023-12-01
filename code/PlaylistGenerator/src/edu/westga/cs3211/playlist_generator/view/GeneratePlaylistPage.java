@@ -105,7 +105,6 @@ public class GeneratePlaylistPage {
 		for (Song song : songs) {
 			if (song.getArtist().equals(seedInfo.getArtist())) {
 				generatedSongs.add(song);
-
 			}
 			if (song.getSongTitle().equals(this.seedInfo.getSongTitle())) {
 				this.generatedSongs.add(song);
@@ -113,14 +112,12 @@ public class GeneratePlaylistPage {
 			if (song.getGenre().equals(this.seedInfo.getGenre())) {
 				this.generatedSongs.add(song);
 			}
-
 			for (String seedTag : seedInfo.getTag()) {
-				if (song.getTag().contains(seedTag)) {
+				if (song.getTags().contains(seedTag)) {
 					generatedSongs.add(song);
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -139,7 +136,6 @@ public class GeneratePlaylistPage {
 	}
 
 	void initialize() {
-
 		this.seedInfo = new SeedInfo();
 		this.generatedSongs = new ArrayList<Song>();
 		FXCollections.shuffle(songs);
