@@ -1,5 +1,8 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.util.Objects;
+
+import edu.westga.cs3211.playlist.resources.UI;
 import java.util.ArrayList;
 
 /**
@@ -24,19 +27,23 @@ public class Song {
 	 * @param artist    is the owner of the song
 	 * @param genre     is the category of the song
 	 */
-	public Song(String songTitle, String artist, String genre, String album, int rank, int year, ArrayList<String> tags) {
-		if(songTitle == null || artist == null || genre == null) {
+
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year,
+			ArrayList<String> tags) {
+		if (songTitle == null || artist == null || genre == null) {
 			throw new IllegalArgumentException();
 		}
 
-	this.songTitle = songTitle;
-	this.artist = artist;
-	this.genre = genre;
-	this.album = album;
-	this.rank = rank;
-	this.year = year;
-	this.tags = tags;
-}
+		this.setSongTitle(songTitle);
+		this.setArtistName(artist);
+
+		this.setGenre(genre);
+
+		this.album = album;
+		this.rank = rank;
+		this.year = year;
+		this.tags = tags;
+	}
 
 	/**
 	 * name of song
@@ -54,6 +61,15 @@ public class Song {
 	 */
 
 	public void setSongTitle(String newTitle) {
+
+		if (newTitle == null) {
+			throw new IllegalArgumentException(UI.EMPTY_TITLE);
+		}
+
+		if (newTitle.isBlank()) {
+			throw new IllegalArgumentException(UI.EMPTY_TITLE);
+		}
+
 		this.songTitle = newTitle;
 	}
 
@@ -73,6 +89,14 @@ public class Song {
 	 */
 
 	public void setArtistName(String newArtist) {
+		if (newArtist == null) {
+			throw new IllegalArgumentException(UI.EMPTY_ARTIST);
+		}
+
+		if (newArtist.isBlank()) {
+			throw new IllegalArgumentException(UI.EMPTY_ARTIST);
+		}
+
 		this.artist = newArtist;
 	}
 
@@ -92,6 +116,10 @@ public class Song {
 	 */
 
 	public void setGenre(String newGenre) {
+		if (newGenre == null) {
+			throw new IllegalArgumentException(UI.EMPTY_ALBUM);
+		}
+
 		this.genre = newGenre;
 	}
 
@@ -111,6 +139,7 @@ public class Song {
 	 */
 
 	public void setAlbum(String newAlbum) {
+
 		this.album = newAlbum;
 	}
 
@@ -151,7 +180,7 @@ public class Song {
 	public void setYear(int newYear) {
 		this.year = newYear;
 	}
-	
+
 	public void setTag(ArrayList<String> tags) {
 		this.tags = tags;
 	}
@@ -167,7 +196,13 @@ public class Song {
 
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.songTitle, this.artist, this.album, this.year, this.genre);
+	}
+
 	public ArrayList<String> getTag() {
 		return tags;
+
 	}
 }
