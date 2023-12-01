@@ -1,8 +1,8 @@
-VM Arguements: --module-path "PATH\TO\javafx-sdk-18\lib" --add-modules javafx.controls,javafx.fxml
+VM Arguements: --module-path "PATH\TO\javafx-sdk-20.0.1\lib" --add-modules javafx.controls,javafx.fxml
 *replace PATH\TO with actual path to javafx sdk lib folder containing jars
 
 Example: On Campus School Computers
---module-path "C:\eclipse\javafx-sdk-18\lib" --add-modules javafx.controls,javafx.fxml
+--module-path "C:\eclipse\javafx-sdk-20.0.1\lib" --add-modules javafx.controls,javafx.fxml
 
 Set git config credentials:
 git config --global user.email "email"

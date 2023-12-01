@@ -1,50 +1,54 @@
 package edu.westga.cs3211.playlist_generator;
-	
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-/** Contains entry point for the application, launches the landing page.
+/**
+ * Contains entry point for the application, launches the landing page.
  * 
  * @author CS 3211
  * @version HW1
  */
 public class Main extends Application {
-    public static final String TITLE = "Playlist Generator";
-    public static final String LANDING_PAGE_FXML = "view/LandingPage.fxml";
+	public static final String TITLE = "Playlist Generator";
+	public static final String LANDING_PAGE_FXML = "view/LandingPage.fxml";
 	public static final String ADD_PAGE = "view/AddPage.fxml";
 	public static final String DISPLAY_PAGE = "view/DisplayPage.fxml";
 	public static final String CONFIRMATION_DIALOG_FXML = "view/ConfirmationDialog.fxml";
+	public static final String PLAYLIST_PAGE_FXML = "view/PlaylistPage.fxml";
+	public static final String GENERATE_PLAYLIST_PAGE_FXML = "view/GeneratePlaylistPage.fxml";
+	public static final String EDIT_PAGE = "view/EditPage.fxml";
 
-    /**
-     * JavaFX entry point.
-     * 
-     * @precondition none
-     * @postcondition none
-     * 
-     * @param primaryStage the main window hook
-     */
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource(Main.LANDING_PAGE_FXML));
-        loader.load();
-        Scene scene = new Scene(loader.getRoot());
-        primaryStage.setTitle(Main.TITLE);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+	/**
+	 * JavaFX entry point.
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @param primaryStage the main window hook
+	 */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource(Main.LANDING_PAGE_FXML));
+		loader.load();
+		Scene scene = new Scene(loader.getRoot());
+		primaryStage.setTitle(Main.TITLE);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
 
-    /**
-     * Java entry point
-     * 
-     * @precondition none
-     * @postcondition none
-     * 
-     * @param args command line arguments <we don't really use these>
-     */
-    public static void main(String[] args) {
-        Main.launch(args);
-    }
+	/**
+	 * Java entry point
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @param args command line arguments (we don't really use these)
+	 */
+	public static void main(String[] args) {
+		Main.launch(args);
+	}
 }
