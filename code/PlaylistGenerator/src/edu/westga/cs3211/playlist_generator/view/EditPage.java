@@ -71,13 +71,15 @@ public class EditPage {
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-				System.out.println("else");
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
 
 		} catch (IllegalArgumentException iae) {
 			this.editErrorLabel.setText(iae.getLocalizedMessage());
+			this.editErrorLabel.setVisible(true);
+		} catch (NullPointerException npe) {
+			this.editErrorLabel.setText(UI.EMPTY_GENRE);
 			this.editErrorLabel.setVisible(true);
 		}
 
@@ -98,12 +100,24 @@ public class EditPage {
 		return true;
 	}
 
+	/**
+	 * sets the selected song
+	 * 
+	 * 
+	 * @param song the song to set
+	 */
+
+	public void setSelectedSong(Song song) {
+		this.selectedSong = song;
+	}
+
 	@FXML
 	void initialize() {
 
 		this.editErrorLabel.setVisible(false);
 
 		if (this.selectedSong != null) {
+
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());
 
@@ -114,12 +128,6 @@ public class EditPage {
 			this.populateRankComboBox();
 
 		}
-
-	}
-
-	public void setSelectedSong(Song newSong) {
-
-		this.selectedSong = newSong;
 
 	}
 

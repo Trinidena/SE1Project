@@ -9,5 +9,5 @@ package edu.westga.cs3211.playlist_generator;
  */
 
 public enum Genre {
-	ROCK, POP, CLASSICAL, COUNTRY, BLUES, RANDB, RAP
+	ROCK, POP, CLASSICAL, COUNTRY, BLUES, RNB, RAP
 }
