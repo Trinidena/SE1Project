@@ -71,13 +71,15 @@ public class EditPage {
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-				System.out.println("else");
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
 
 		} catch (IllegalArgumentException iae) {
 			this.editErrorLabel.setText(iae.getLocalizedMessage());
+			this.editErrorLabel.setVisible(true);
+		} catch (NullPointerException npe) {
+			this.editErrorLabel.setText(UI.EMPTY_GENRE);
 			this.editErrorLabel.setVisible(true);
 		}
 

@@ -1,7 +1,7 @@
 package edu.westga.cs3211.playlist_generator.view;
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 import edu.westga.cs3211.playlist_generator.model.Song;
