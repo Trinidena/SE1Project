@@ -1,5 +1,6 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import edu.westga.cs3211.playlist.resources.UI;
@@ -17,7 +18,7 @@ public class Song {
 	private String album;
 	private int rank;
 	private int year;
-	private String tags;
+	private String tag;
 
 	/**
 	 * Create a new song with the provided information.
@@ -31,7 +32,7 @@ public class Song {
 	 * @param year      the year the song came out
 	 */
 
-	public Song(String songTitle, String artist, String genre, String album, int rank, int year, String tags) {
+	public Song(String songTitle, String artist, String genre, String album, int rank, int year, String tag) {
 
 		this.setSongTitle(songTitle);
 		this.setArtistName(artist);
@@ -41,7 +42,7 @@ public class Song {
 		this.album = album;
 		this.rank = rank;
 		this.year = year;
-		this.tags = tags;
+		this.tag = tag;
 	}
 
 	/**
@@ -187,7 +188,7 @@ public class Song {
 	 * @param tags the list to be set
 	 */
 	public void setTag(String tags) {
-		this.tags = tags;
+		this.tag = tags;
 	}
 
 	/**
@@ -196,7 +197,7 @@ public class Song {
 	 * @return the list of tags
 	 */
 	public String getTags() {
-		return this.tags;
+		return this.tag;
 
 	}
 
