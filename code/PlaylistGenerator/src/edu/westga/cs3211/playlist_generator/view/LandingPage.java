@@ -127,12 +127,17 @@ public class LandingPage {
 
 	}
 
-	public String formatSongDetails(Song selectedSong) {
+public String formatSongDetails(Song selectedSong) {
+    	
+    	String formattedSongDetails = "";
+    	formattedSongDetails = formattedSongDetails.concat("Song: ").concat(selectedSong.getSongTitle())
+    			.concat("\n").concat("Artist: ").concat(selectedSong.getArtist())
+    			.concat("\n").concat("Genre: ").concat(selectedSong.getGenre())
+    			.concat("\n").concat("Album: ").concat(selectedSong.getAlbum())
+    			.concat("\n").concat("Rank: ").concat(Integer.toString(selectedSong.getRank()))
+    			.concat("\n").concat("Year: ").concat(Integer.toString(selectedSong.getYear()))
+    			.concat("\n").concat("Tag: ").concat(String.join(", ", selectedSong.getTag()));
 
-		String formattedSongDetails = "";
-		formattedSongDetails = formattedSongDetails.concat("Song: ").concat(selectedSong.getSongTitle()).concat("\n")
-				.concat("Artist: ").concat(selectedSong.getArtist()).concat("\n").concat("Genre: ")
-				.concat(selectedSong.getGenre()).concat("\n").concat("Tag: ").concat(selectedSong.getTag());
 		return formattedSongDetails;
 	}
 

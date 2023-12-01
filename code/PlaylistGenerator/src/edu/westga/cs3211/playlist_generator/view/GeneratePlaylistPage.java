@@ -1,7 +1,9 @@
 package edu.westga.cs3211.playlist_generator.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3211.playlist_generator.model.SeedInfo;
 import edu.westga.cs3211.playlist_generator.model.Song;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +16,11 @@ public class GeneratePlaylistPage {
 	
 	private ObservableList<Song> songs;
 	
-	private List<Song> generatedSongs;
+	private ArrayList<Song> generatedSongs;
+	
+	private ArrayList<String> generatedTags;
+	
+	private SeedInfo seedInfo;
     @FXML
     private TextField albumTextField;
 
@@ -37,10 +43,13 @@ public class GeneratePlaylistPage {
     private TextField songTitleTextField;
 
     @FXML
-    private TextField tagTextField1;
+    private TextField tagTextField;
 
     @FXML
     private TextField yearTextField;
+    
+    @FXML
+    private TextField lengthTextField;
 
     @FXML
     void handleCancelButton(ActionEvent event) {
@@ -49,8 +58,44 @@ public class GeneratePlaylistPage {
 
     @FXML
     void handleGenerateButton(ActionEvent event) {
-
+    	gatherSeedInfo();
+    	generatePlaylist();
     }
+
+	private void gatherSeedInfo() {
+		if (this.artistTextField != null) {
+			this.seedInfo.setArtistName(this.artistTextField.getText());
+		}if (this.songTitleTextField != null) {
+			this.seedInfo.setSongTitle(this.songTitleTextField.getText());
+		}if (this.genreTextField != null) {
+			this.seedInfo.setGenre(this.genreTextField.getText());
+		}if (this.tagTextField != null) {
+			this.seedInfo.setTag(new ArrayList<String>());
+		}if (this.lengthTextField != null) {
+			this.seedInfo.setDesiredLength(this.lengthTextField.getText());
+		}
+	}
+	
+	private void generatePlaylist() {
+		for(Song song : songs) {
+			if (song.getArtist().equals(seedInfo.getArtist())) {
+				generatedSongs.add(song);
+			}
+			if (song.getSongTitle().equals(seedInfo.getSongTitle())) {
+				generatedSongs.add(song);
+			}
+			if (song.getGenre().equals(seedInfo.getGenre())) {
+				generatedSongs.add(song);
+			}
+			
+			for (String seedTag : seedInfo.getTag()) {
+			    if (song.getTag().contains(seedTag)) {
+			        
+			    }
+			}
+		}
+		
+	}
 
 	public boolean bind(ObservableList<Song> songs) {
 		if (songs == null) {
@@ -58,5 +103,10 @@ public class GeneratePlaylistPage {
 		}
 		this.songs = songs;
 		return true;
+	}
+	
+	void initialize() {
+		seedInfo = new SeedInfo();
+		generatedSongs = new ArrayList<Song>();
 	}
 }
