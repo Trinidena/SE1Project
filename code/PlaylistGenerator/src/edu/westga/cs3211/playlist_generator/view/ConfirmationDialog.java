@@ -11,6 +11,13 @@ import javafx.scene.Node;
 
 import javafx.scene.control.Button;
 
+/** Class provides a confirmation dialog box when the user selects a song to delete from the list of songs
+ *  on the landing page
+ *  
+ * @author Trinidad
+ * @version 1.0
+ */
+
 public class ConfirmationDialog {
 
 	private Song selectedSong;

@@ -1,9 +1,15 @@
 package edu.westga.cs3211.playlist_generator.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import edu.westga.cs3211.playlist_generator.model.Song;
 
+/**
+ * class provides tests for the Song model class
+ * @author Trinidad
+ * @version 1.0
+ */
 public class SongTest {
 
 	@Test
