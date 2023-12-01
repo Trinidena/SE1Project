@@ -1,0 +1,1 @@
+https://www.westga.edu/~astanesc/CS1302_data/checkstyle/UWG_checks.xml
