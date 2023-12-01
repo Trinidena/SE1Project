@@ -93,6 +93,9 @@ public class AddPage {
 				this.addErrorLabel.setText("Song already exists");
 				this.addErrorLabel.setVisible(true);
 			}
+		} catch (IllegalArgumentException iae) {
+			this.addErrorLabel.setText(iae.getLocalizedMessage());
+			this.addErrorLabel.setVisible(true);
 		} catch (NullPointerException npe) {
 			this.addErrorLabel.setText(UI.EMPTY_GENRE);
 			this.addErrorLabel.setVisible(true);
