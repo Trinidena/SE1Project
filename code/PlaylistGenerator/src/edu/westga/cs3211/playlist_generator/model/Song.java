@@ -1,6 +1,9 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
+
 import java.util.Objects;
 
 import edu.westga.cs3211.playlist.resources.UI;
@@ -12,6 +15,7 @@ import edu.westga.cs3211.playlist.resources.UI;
  * @version HW1
  */
 public class Song {
+	private static final int CUTOFF_YEAR = 999;
 	private String songTitle;
 	private String artist;
 	private String genre;
@@ -39,10 +43,14 @@ public class Song {
 
 		this.setGenre(genre);
 
+		this.setYear(year);
+
 		this.album = album;
 		this.rank = rank;
+
 		this.year = year;
 		this.tag = tag;
+
 	}
 
 	/**
@@ -178,6 +186,10 @@ public class Song {
 	 */
 
 	public void setYear(int newYear) {
+		if (newYear > LocalDate.now().getYear() || newYear < CUTOFF_YEAR && newYear != 0) {
+			throw new IllegalArgumentException(UI.INVALID_YEAR);
+		}
+
 		this.year = newYear;
 	}
 

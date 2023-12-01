@@ -63,15 +63,15 @@ public class EditPage {
 
 		try {
 
-			this.setData();
+			Song copySong = this.createCopySong();
 
-			if (this.checkIfAdded()) {
+			if (this.checkIfAdded(copySong)) {
 
 				this.editErrorLabel.setText("Song already exists");
 				this.editErrorLabel.setVisible(true);
 
 			} else {
-
+				this.setData();
 				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
 
@@ -159,16 +159,12 @@ public class EditPage {
 
 	}
 
-	private boolean checkIfAdded() {
-		int songCount = 0;
+	private boolean checkIfAdded(Song newSong) {
 
 		for (Song currentSong : this.songs) {
-			if (this.selectedSong.hashCode() == currentSong.hashCode()) {
-				songCount++;
+			if (newSong.hashCode() == currentSong.hashCode()) {
+				return true;
 			}
-		}
-		if (songCount > NUMBER_OF_TIMES_A_SONG_CAN_BE_IN_THE_LIST) {
-			return true;
 		}
 
 		return false;
@@ -186,6 +182,29 @@ public class EditPage {
 		for (int rank = 1; rank < UI.RANK_LIMIT; rank++) {
 			this.editRankComboBox.getItems().add(rank);
 		}
+	}
+
+	private Song createCopySong() {
+		var rankCheck = this.editRankComboBox.getValue();
+		int rank = 0;
+
+		String title = this.editTitleTextField.textProperty().get();
+		String artist = this.editArtistTextField.textProperty().get();
+		String genre = this.editGenreComboBox.getValue().toString();
+		String tag = this.editAlbumTextField.getText();
+
+		int year = Integer.parseInt(this.editYearTextField.textProperty().get());
+
+		if (rankCheck != null) {
+			rank = this.editRankComboBox.getValue();
+
+		}
+
+		String album = this.editAlbumTextField.textProperty().get();
+
+		Song newSong = new Song(title, artist, genre, album, rank, year, tag);
+
+		return newSong;
 	}
 
 }

@@ -122,10 +122,11 @@ public class GeneratePlaylistPage {
 		checkForDuplicateSongs();
 		while (Integer.parseInt(this.lengthTextField.getText()) > this.generatedSongs.size()) {
 			if (!generatedSongs.isEmpty()) {
-			    generatedSongs.remove(generatedSongs.size() - 1);
+				generatedSongs.remove(generatedSongs.size() - 1);
 			}
 		}
 	}
+
 	/**
 	 * Binds the list to an outside list
 	 * 
@@ -140,19 +141,20 @@ public class GeneratePlaylistPage {
 		this.songs = songs;
 		return true;
 	}
-	
+
 	private void checkForDuplicateSongs() {
 		for (int i = 0; i < this.generatedSongs.size(); i++) {
-            Song currentSong = this.generatedSongs.get(i);
-            for (int j = i + 1; j < this.generatedSongs.size(); j++) {
-                Song nextSong = this.generatedSongs.get(j);
-                if (currentSong.equals(nextSong)) {
-                	this.generatedSongs.remove(j);
-                    j--;
-                }
-            }
-        }
+			Song currentSong = this.generatedSongs.get(i);
+			for (int j = i + 1; j < this.generatedSongs.size(); j++) {
+				Song nextSong = this.generatedSongs.get(j);
+				if (currentSong.equals(nextSong)) {
+					this.generatedSongs.remove(j);
+					j--;
+				}
+			}
+		}
 	}
+
 	void initialize() {
 		this.seedInfo = new SeedInfo();
 		this.generatedSongs = new ArrayList<Song>();
