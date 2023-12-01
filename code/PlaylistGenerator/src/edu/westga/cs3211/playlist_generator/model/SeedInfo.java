@@ -11,7 +11,7 @@ public class SeedInfo {
 	private int rank;
 	private int year;
 	private ArrayList<String> tags;
-	private String desiredLength;
+	private String desiredLength;s
 	
 	public SeedInfo() {
 		

@@ -1,13 +1,27 @@
 package edu.westga.cs3211.playlist_generator.view;
 
+import edu.westga.cs3211.playlist.resources.UI;
+import edu.westga.cs3211.playlist_generator.Genre;
 import edu.westga.cs3211.playlist_generator.model.Song;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/**
+ * The page for editing songs
+ * 
+ * @author CS 3211
+ * @version fall 2023
+ * 
+ */
+
 public class EditPage {
+
+	private static final int NUMBER_OF_TIMES_A_SONG_CAN_BE_IN_THE_LIST = 1;
 
 	@FXML
 	private TextField editAlbumTextField;
@@ -16,10 +30,10 @@ public class EditPage {
 	private TextField editArtistTextField;
 
 	@FXML
-	private TextField editGenreTextField;
+	private ComboBox<Genre> editGenreComboBox;
 
 	@FXML
-	private TextField editRankTextField;
+	private ComboBox<Integer> editRankComboBox;
 
 	@FXML
 	private TextField editTagTextField1;
@@ -30,12 +44,16 @@ public class EditPage {
 	@FXML
 	private TextField editYearTextField;
 
+	@FXML
+	private Label editErrorLabel;
+
 	private ObservableList<Song> songs;
 
 	private Song selectedSong;
 
 	@FXML
 	void cancel(ActionEvent event) {
+
 		((Node) (event.getSource())).getScene().getWindow().hide();
 
 	}
@@ -43,9 +61,26 @@ public class EditPage {
 	@FXML
 	void editSongButton(ActionEvent event) {
 
-		this.setData();
+		try {
 
-		((Node) (event.getSource())).getScene().getWindow().hide();
+			this.setData();
+
+			if (this.checkIfAdded()) {
+
+				this.editErrorLabel.setText("Song already exists");
+				this.editErrorLabel.setVisible(true);
+
+			} else {
+				System.out.println("else");
+
+				((Node) (event.getSource())).getScene().getWindow().hide();
+			}
+
+		} catch (IllegalArgumentException iae) {
+			this.editErrorLabel.setText(iae.getLocalizedMessage());
+			this.editErrorLabel.setVisible(true);
+		}
+
 	}
 
 	/**
@@ -65,13 +100,18 @@ public class EditPage {
 
 	@FXML
 	void initialize() {
-		if (selectedSong != null) {
+
+		this.editErrorLabel.setVisible(false);
+
+		if (this.selectedSong != null) {
 			this.editTitleTextField.textProperty().set(this.selectedSong.getSongTitle());
 			this.editArtistTextField.textProperty().set(this.selectedSong.getArtist());
-			this.editGenreTextField.textProperty().set(this.selectedSong.getGenre());
+
 			this.editAlbumTextField.textProperty().set(this.selectedSong.getAlbum());
-			this.editRankTextField.textProperty().set(String.valueOf(this.selectedSong.getRank()));
+
 			this.editYearTextField.textProperty().set(String.valueOf(this.selectedSong.getYear()));
+			this.populateGenreComboBox();
+			this.populateRankComboBox();
 
 		}
 
@@ -84,15 +124,21 @@ public class EditPage {
 	}
 
 	private void setData() {
+
+		var rankCheck = this.editRankComboBox.getValue();
+
 		this.selectedSong.setSongTitle(this.editTitleTextField.textProperty().get());
 		this.selectedSong.setArtistName(this.editArtistTextField.textProperty().get());
-		this.selectedSong.setGenre(this.editGenreTextField.textProperty().get());
+		this.selectedSong.setGenre(this.editGenreComboBox.getValue().toString());
 
 		String yearString = this.editYearTextField.textProperty().get();
-		String rankString = this.editRankTextField.textProperty().get();
 
 		int year = Integer.parseInt(this.editYearTextField.textProperty().get());
-		int rank = Integer.parseInt(rankString);
+
+		if (rankCheck != null) {
+			int rank = this.editRankComboBox.getValue();
+			this.selectedSong.setRank(rank);
+		}
 
 		String album = this.editAlbumTextField.textProperty().get();
 
@@ -102,8 +148,35 @@ public class EditPage {
 		if (yearString != null && !yearString.isEmpty()) {
 			this.selectedSong.setYear(year);
 		}
-		if (rankString != null && !rankString.isEmpty()) {
-			this.selectedSong.setRank(rank);
+
+	}
+
+	private boolean checkIfAdded() {
+		int songCount = 0;
+
+		for (Song currentSong : this.songs) {
+			if (this.selectedSong.hashCode() == currentSong.hashCode()) {
+				songCount++;
+			}
+		}
+		if (songCount > NUMBER_OF_TIMES_A_SONG_CAN_BE_IN_THE_LIST) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private void populateGenreComboBox() {
+
+		for (Genre currentGenre : Genre.values()) {
+			this.editGenreComboBox.getItems().add(currentGenre);
+		}
+	}
+
+	private void populateRankComboBox() {
+
+		for (int rank = 1; rank < UI.RANK_LIMIT; rank++) {
+			this.editRankComboBox.getItems().add(rank);
 		}
 	}
 
