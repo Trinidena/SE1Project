@@ -20,6 +20,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/** 
+ * Class generates the playlist page where the generated playlist is shown
+ * @author Trinidad
+ * @version 1.0
+ */
+
 public class GeneratePlaylistPage {
 
 	private static final int PLAYLIST_MAX = 15;
@@ -70,13 +76,17 @@ public class GeneratePlaylistPage {
 
 	@FXML
 	void handleGenerateButton(ActionEvent event) throws IOException {
-		gatherSeedInfo();
-		if (!allFieldsAreEmpty) {
-			generatePlaylist();
+		this.gatherSeedInfo();
+		if (!this.allFieldsAreEmpty) {
+			this.generatePlaylist();
 		}
-		loadPlaylistPage();
+		this.loadPlaylistPage();
 	}
-
+	
+	/**
+	 * method loads the page the contains the generated playlist
+	 * @throws IOException
+	 */
 	public void loadPlaylistPage() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.PLAYLIST_PAGE_FXML));
@@ -91,11 +101,14 @@ public class GeneratePlaylistPage {
 		page.bind(this.generatedSongs);
 		addTodoStage.show();
 	}
-
+	
+	/**
+	 * method gathers the seed info provided from the user to be used in generation
+	 */
 	public void gatherSeedInfo() {
-		checkAllFieldsEmpty();
+		this.checkAllFieldsEmpty();
 
-		if (!allFieldsAreEmpty) {
+		if (!this.allFieldsAreEmpty) {
 			if (this.artistTextField != null) {
 				this.seedInfo.setArtistName(this.artistTextField.getText());
 			}
@@ -112,7 +125,7 @@ public class GeneratePlaylistPage {
 				this.seedInfo.setDesiredLength(this.lengthTextField.getText());
 			}
 		} else {
-			generatePlaylist(true);
+			this.generatePlaylist(true);
 		}
 	}
 
@@ -126,7 +139,10 @@ public class GeneratePlaylistPage {
 			this.allFieldsAreEmpty = true;
 		}
 	}
-
+	
+	/**
+	 * method generates the playlist if none of the fields are empty
+	 */
 	public void generatePlaylist() {
 		while (this.generatedSongs.size() <= (Integer.parseInt(this.lengthTextField.getText()))) {
 			FXCollections.shuffle(this.songs);
@@ -141,31 +157,34 @@ public class GeneratePlaylistPage {
 					this.generatedSongs.add(song);
 				}
 				// for (String seedTag : this.seedInfo.getTag()) {
-				if (song.getTag().equals(seedInfo.getTag())) {
+				if (song.getTag().equals(this.seedInfo.getTag())) {
 					this.generatedSongs.add(song);
 				}
 			}
 		}
-		checkForDuplicateSongs();
+		this.checkForDuplicateSongs();
 		while (Integer.parseInt(this.lengthTextField.getText()) > this.generatedSongs.size()) {
-			if (!generatedSongs.isEmpty()) {
-				generatedSongs.remove(generatedSongs.size() - 1);
+			if (!this.generatedSongs.isEmpty()) {
+				this.generatedSongs.remove(this.generatedSongs.size() - 1);
 			}
 		}
 	}
 
+	/** generates the playlist based on if all the fields are empty on the page
+	 * @param allFieldsAreEmpty is a boolean that is set when CheckAllFieldsEmpty() is called
+	 */
 	public void generatePlaylist(boolean allFieldsAreEmpty) {
 		FXCollections.shuffle(this.songs);
 		Random random = new Random();
 		int count = 0;
-		randomTargetLength = random.nextInt((PLAYLIST_MAX - PLAYLIST_MIN) + PLAYLIST_MIN);
-		while (count < randomTargetLength) {
+		this.randomTargetLength = random.nextInt((PLAYLIST_MAX - PLAYLIST_MIN) + PLAYLIST_MIN);
+		while (count < this.randomTargetLength) {
 			for (Song song : this.songs) {
-				generatedSongs.add(song);
+				this.generatedSongs.add(song);
 				count++;
 			}
 		}
-		checkForDuplicateSongs();
+		this.checkForDuplicateSongs();
 	}
 
 	/**
@@ -184,13 +203,13 @@ public class GeneratePlaylistPage {
 	}
 
 	private void checkForDuplicateSongs() {
-		for (int i = 0; i < this.generatedSongs.size(); i++) {
-			Song currentSong = this.generatedSongs.get(i);
-			for (int j = i + 1; j < this.generatedSongs.size(); j++) {
-				Song nextSong = this.generatedSongs.get(j);
+		for (int index = 0; index < this.generatedSongs.size(); index++) {
+			Song currentSong = this.generatedSongs.get(index);
+			for (int index2 = index + 1; index2 < this.generatedSongs.size(); index2++) {
+				Song nextSong = this.generatedSongs.get(index2);
 				if (currentSong.equals(nextSong)) {
-					this.generatedSongs.remove(j);
-					j--;
+					this.generatedSongs.remove(index2);
+					index2--;
 				}
 			}
 		}

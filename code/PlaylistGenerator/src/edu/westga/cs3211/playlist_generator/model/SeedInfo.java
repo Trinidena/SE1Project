@@ -1,6 +1,10 @@
 package edu.westga.cs3211.playlist_generator.model;
 
-import java.util.ArrayList;
+/**
+ * class provides a model for storing the seed info provided by the user
+ * @author Trinidad
+ * @version 1.0
+ */
 
 public class SeedInfo {
 
@@ -11,12 +15,6 @@ public class SeedInfo {
 	private int rank;
 	private int year;
 	private String tag;
-
-	private String desiredLength;
-
-	public SeedInfo() {
-
-	}
 
 	/**
 	 * gets the title of the song
@@ -154,9 +152,9 @@ public class SeedInfo {
 	}
 
 	/**
-	 * Sets the tags
+	 * Sets the tag
 	 * 
-	 * @param tags the tag to set
+	 * @param tag the tag to set
 	 */
 
 	public void setTag(String tag) {
@@ -170,6 +168,5 @@ public class SeedInfo {
 	 */
 
 	public void setDesiredLength(String length) {
-		this.desiredLength = length;
 	}
 }
