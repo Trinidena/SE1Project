@@ -70,7 +70,7 @@ public class AddPage {
 
 		int rank = 0;
 
-		try {
+	
 
 			var rankCheck = this.addRankComboBox.getValue();
 			if (rankCheck != null) {
@@ -93,10 +93,7 @@ public class AddPage {
 				this.addErrorLabel.setText("Song already exists");
 				this.addErrorLabel.setVisible(true);
 			}
-		} catch (NullPointerException npe) {
-			this.addErrorLabel.setText(UI.EMPTY_GENRE);
-			this.addErrorLabel.setVisible(true);
-		}
+		
 	}
 
 	@FXML
