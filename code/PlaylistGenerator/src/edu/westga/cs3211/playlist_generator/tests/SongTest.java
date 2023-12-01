@@ -7,6 +7,7 @@ import edu.westga.cs3211.playlist_generator.model.Song;
 
 /**
  * class provides tests for the Song model class
+ * 
  * @author Trinidad
  * @version 1.0
  */

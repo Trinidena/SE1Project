@@ -2,6 +2,7 @@ package edu.westga.cs3211.playlist_generator.model;
 
 /**
  * class provides a model for storing the seed info provided by the user
+ * 
  * @author Trinidad
  * @version 1.0
  */
