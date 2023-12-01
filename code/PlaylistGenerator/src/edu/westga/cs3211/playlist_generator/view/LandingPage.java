@@ -40,19 +40,23 @@ public class LandingPage {
 
 	@FXML
 	void handleRemoveSongButton(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource(Main.CONFIRMATION_DIALOG_FXML));
-		loader.load();
-		Parent parent = loader.getRoot();
-		Scene scene = new Scene(parent);
-		Stage addTodoStage = new Stage();
-		addTodoStage.setTitle(Main.TITLE);
-		addTodoStage.setScene(scene);
-		addTodoStage.initModality(Modality.APPLICATION_MODAL);
-		ConfirmationDialog confirmationDialog = loader.getController();
-		confirmationDialog.bind(this.songs.getItems(), this.songs.getSelectionModel().getSelectedItem());
-		this.songDetailsTextArea.clear();
-		addTodoStage.show();
+
+		if (this.songs.getItems().size() > 0) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.CONFIRMATION_DIALOG_FXML));
+			loader.load();
+			Parent parent = loader.getRoot();
+			Scene scene = new Scene(parent);
+			Stage addTodoStage = new Stage();
+			addTodoStage.setTitle(Main.TITLE);
+			addTodoStage.setScene(scene);
+			addTodoStage.initModality(Modality.APPLICATION_MODAL);
+			ConfirmationDialog confirmationDialog = loader.getController();
+			confirmationDialog.bind(this.songs.getItems(), this.songs.getSelectionModel().getSelectedItem());
+			this.songDetailsTextArea.clear();
+			addTodoStage.show();
+		}
+
 	}
 
 	@FXML
@@ -75,19 +79,22 @@ public class LandingPage {
 
 	@FXML
 	void handleGenerateButton(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource(Main.GENERATE_PLAYLIST_PAGE_FXML));
-		loader.load();
-		Parent parent = loader.getRoot();
-		Scene scene = new Scene(parent);
-		Stage addTodoStage = new Stage();
-		addTodoStage.setTitle(Main.TITLE);
-		addTodoStage.setScene(scene);
-		addTodoStage.initModality(Modality.APPLICATION_MODAL);
-		GeneratePlaylistPage page = loader.getController();
-		page.bind(this.songs.getItems());
 
-		addTodoStage.show();
+		if (this.songs.getItems().size() > 0) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.GENERATE_PLAYLIST_PAGE_FXML));
+			loader.load();
+			Parent parent = loader.getRoot();
+			Scene scene = new Scene(parent);
+			Stage addTodoStage = new Stage();
+			addTodoStage.setTitle(Main.TITLE);
+			addTodoStage.setScene(scene);
+			addTodoStage.initModality(Modality.APPLICATION_MODAL);
+			GeneratePlaylistPage page = loader.getController();
+			page.bind(this.songs.getItems());
+
+			addTodoStage.show();
+		}
 
 	}
 
@@ -131,25 +138,31 @@ public class LandingPage {
 
 	@FXML
 	void editButton(ActionEvent event) throws IOException {
-		final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
 
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource(Main.EDIT_PAGE));
-		loader.load();
-		Parent parent = loader.getRoot();
-		Scene scene = new Scene(parent);
-		Stage addTodoStage = new Stage();
-		addTodoStage.setTitle(Main.TITLE);
-		addTodoStage.setScene(scene);
-		addTodoStage.initModality(Modality.APPLICATION_MODAL);
-		EditPage editPage = loader.getController();
+		if (this.songs.getItems().size() > 0) {
+			final Song selectedSong = this.songs.getSelectionModel().getSelectedItem();
 
-		editPage.setSelectedSong(selectedSong);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.EDIT_PAGE));
+			loader.load();
+			Parent parent = loader.getRoot();
+			Scene scene = new Scene(parent);
+			Stage addTodoStage = new Stage();
+			addTodoStage.setTitle(Main.TITLE);
+			addTodoStage.setScene(scene);
+			addTodoStage.initModality(Modality.APPLICATION_MODAL);
+			EditPage editPage = loader.getController();
 
-		editPage.initialize();
-		editPage.bind(this.songs.getItems());
+			editPage.setSelectedSong(selectedSong);
 
-		addTodoStage.show();
+			editPage.initialize();
+			editPage.bind(this.songs.getItems());
+
+			addTodoStage.showAndWait();
+			this.songs.refresh();
+			this.displaySongDetails(null);
+		}
+
 	}
 
 	@FXML

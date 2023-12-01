@@ -8,14 +8,12 @@ import javafx.scene.input.MouseEvent;
 
 public class PlaylistPage {
 
-    @FXML
-    private ListView<Song> songs;
+	@FXML
+	private ListView<Song> songs;
 
 	public void bind(ObservableList<Song> items) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-    
 }
-

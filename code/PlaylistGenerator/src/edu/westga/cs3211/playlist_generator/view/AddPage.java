@@ -8,7 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import edu.westga.cs3211.playlist.resources.UI;
+import edu.westga.cs3211.playlist_generator.Genre;
 
 /**
  * Code behind for the Add Page.
@@ -27,7 +31,9 @@ public class AddPage {
 	@FXML
 	private TextField artistTextField;
 	@FXML
-	private TextField genreTextField;
+	private ComboBox<Genre> addGenreComboBox;
+	@FXML
+	private ComboBox<Integer> addRankComboBox;
 	@FXML
 	private TextField tagTextField;
 	@FXML
@@ -38,6 +44,9 @@ public class AddPage {
 
 	@FXML
 	private TextField yearTextField;
+
+	@FXML
+	private Label addErrorLabel;
 
 	private ObservableList<Song> songs;
 
@@ -60,16 +69,31 @@ public class AddPage {
 
 	@FXML
 	void addSongButton(ActionEvent event) {
-		Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(),
-				this.genreTextField.getText(), this.tagTextField.getText());
 
-		this.addedSong = song;
+		try {
+			String comboString = this.addGenreComboBox.getValue().toString();
 
-		this.setOptionalItems();
+			Song song = new Song(this.songTitleTextField.getText(), this.artistTextField.getText(), comboString,
+					this.tagTextField.getText());
 
-		this.songs.add(song);
+			this.addedSong = song;
 
-		((Node) (event.getSource())).getScene().getWindow().hide();
+			this.setOptionalItems();
+
+			if (!this.checkIfAdded()) {
+				this.songs.add(song);
+				((Node) (event.getSource())).getScene().getWindow().hide();
+			} else {
+				this.addErrorLabel.setText("Song already exists");
+				this.addErrorLabel.setVisible(true);
+			}
+		} catch (IllegalArgumentException iae) {
+			this.addErrorLabel.setText(iae.getLocalizedMessage());
+			this.addErrorLabel.setVisible(true);
+		} catch (NullPointerException npe) {
+			this.addErrorLabel.setText(UI.EMPTY_GENRE);
+			this.addErrorLabel.setVisible(true);
+		}
 
 	}
 
@@ -81,6 +105,9 @@ public class AddPage {
 
 	@FXML
 	void initialize() {
+		this.addErrorLabel.setVisible(false);
+		this.populateGenreComboBox();
+		this.populateRankComboBox();
 	}
 
 	private void setOptionalItems() {
@@ -89,6 +116,28 @@ public class AddPage {
 		if (!albumName.isEmpty()) {
 			this.addedSong.setAlbum(albumName);
 		}
+	}
 
+	private boolean checkIfAdded() {
+		for (Song currentSong : this.songs) {
+			if (this.addedSong.hashCode() == currentSong.hashCode()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void populateGenreComboBox() {
+
+		for (Genre currentGenre : Genre.values()) {
+			this.addGenreComboBox.getItems().add(currentGenre);
+		}
+	}
+
+	private void populateRankComboBox() {
+
+		for (int rank = 1; rank < UI.RANK_LIMIT; rank++) {
+			this.addRankComboBox.getItems().add(rank);
+		}
 	}
 }

@@ -1,5 +1,9 @@
 package edu.westga.cs3211.playlist_generator.model;
 
+import java.util.Objects;
+
+import edu.westga.cs3211.playlist.resources.UI;
+
 /**
  * Stores and manages information for a single Prescription.
  * 
@@ -23,12 +27,11 @@ public class Song {
 	 * @param genre     is the category of the song
 	 */
 	public Song(String songTitle, String artist, String genre, String tag) {
-		if (songTitle == null || artist == null || genre == null) {
-			throw new IllegalArgumentException();
-		}
-		this.songTitle = songTitle;
-		this.artist = artist;
-		this.genre = genre;
+
+		this.setSongTitle(songTitle);
+		this.setArtistName(artist);
+
+		this.setGenre(genre);
 		this.tag = tag;
 	}
 
@@ -48,6 +51,15 @@ public class Song {
 	 */
 
 	public void setSongTitle(String newTitle) {
+
+		if (newTitle == null) {
+			throw new IllegalArgumentException(UI.EMPTY_TITLE);
+		}
+
+		if (newTitle.isBlank()) {
+			throw new IllegalArgumentException(UI.EMPTY_TITLE);
+		}
+
 		this.songTitle = newTitle;
 	}
 
@@ -67,6 +79,14 @@ public class Song {
 	 */
 
 	public void setArtistName(String newArtist) {
+		if (newArtist == null) {
+			throw new IllegalArgumentException(UI.EMPTY_ARTIST);
+		}
+
+		if (newArtist.isBlank()) {
+			throw new IllegalArgumentException(UI.EMPTY_ARTIST);
+		}
+
 		this.artist = newArtist;
 	}
 
@@ -86,6 +106,10 @@ public class Song {
 	 */
 
 	public void setGenre(String newGenre) {
+		if (newGenre == null) {
+			throw new IllegalArgumentException(UI.EMPTY_ALBUM);
+		}
+
 		this.genre = newGenre;
 	}
 
@@ -105,6 +129,14 @@ public class Song {
 	 */
 
 	public void setAlbum(String newAlbum) {
+		if (newAlbum == null) {
+			throw new IllegalArgumentException(UI.EMPTY_ALBUM);
+		}
+
+		if (newAlbum.isBlank()) {
+			throw new IllegalArgumentException(UI.EMPTY_ALBUM);
+		}
+
 		this.album = newAlbum;
 	}
 
@@ -154,6 +186,11 @@ public class Song {
 	@Override
 	public String toString() {
 		return this.songTitle + "		" + this.tag;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.songTitle, this.artist, this.album, this.year, this.genre);
 	}
 
 	public String getTag() {
