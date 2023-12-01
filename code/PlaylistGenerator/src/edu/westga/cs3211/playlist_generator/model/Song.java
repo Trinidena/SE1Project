@@ -2,8 +2,6 @@ package edu.westga.cs3211.playlist_generator.model;
 
 import java.time.LocalDate;
 
-import java.util.ArrayList;
-
 import java.util.Objects;
 
 import edu.westga.cs3211.playlist.resources.UI;
@@ -32,7 +30,7 @@ public class Song {
 	 * @param genre     is the category of the song
 	 * @param album     the album the song comes from
 	 * @param rank      the rank of the song
-	 * @param tags      the list of tags
+	 * @param tag       the tag
 	 * @param year      the year the song came out
 	 */
 
@@ -45,11 +43,10 @@ public class Song {
 
 		this.setYear(year);
 
-		this.album = album;
-		this.rank = rank;
+		this.setAlbum(album);
+		this.setRank(rank);
 
-		this.year = year;
-		this.tag = tag;
+		this.setTag(tag);
 
 	}
 
@@ -226,7 +223,7 @@ public class Song {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.songTitle, this.artist, this.album, this.year, this.genre);
+		return Objects.hash(this.songTitle, this.artist, this.genre, this.album, this.rank, this.year);
 	}
 
 }

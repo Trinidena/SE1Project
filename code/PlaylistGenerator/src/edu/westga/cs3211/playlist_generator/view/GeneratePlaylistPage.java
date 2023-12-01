@@ -30,7 +30,6 @@ public class GeneratePlaylistPage {
 	private ArrayList<Song> generatedSongs;
 
 	private SeedInfo seedInfo;
-	
 	private int randomTargetLength;
 	@FXML
 	private TextField albumTextField;
@@ -95,7 +94,7 @@ public class GeneratePlaylistPage {
 
 	public void gatherSeedInfo() {
 		checkAllFieldsEmpty();
-		
+
 		if (!allFieldsAreEmpty) {
 			if (this.artistTextField != null) {
 				this.seedInfo.setArtistName(this.artistTextField.getText());
@@ -112,20 +111,20 @@ public class GeneratePlaylistPage {
 			if (this.lengthTextField != null) {
 				this.seedInfo.setDesiredLength(this.lengthTextField.getText());
 			}
-		}
-		else {
+		} else {
 			generatePlaylist(true);
 		}
 	}
 
 	private void checkAllFieldsEmpty() {
-		if (this.artistTextField.getText() == null || this.artistTextField.getText().trim().isEmpty()
-				&& this.songTitleTextField.getText() == null || this.songTitleTextField.getText().trim().isEmpty()
-				&& this.genreTextField.getText() == null || this.genreTextField.getText().trim().isEmpty()
-				&& this.tagTextField.getText() == null || this.tagTextField.getText().trim().isEmpty()
-				&& this.lengthTextField.getText() == null || this.lengthTextField.getText().trim().isEmpty()) {
-				this.allFieldsAreEmpty = true;
-			}
+		if (this.artistTextField.getText() == null
+				|| this.artistTextField.getText().trim().isEmpty() && this.songTitleTextField.getText() == null
+				|| this.songTitleTextField.getText().trim().isEmpty() && this.genreTextField.getText() == null
+				|| this.genreTextField.getText().trim().isEmpty() && this.tagTextField.getText() == null
+				|| this.tagTextField.getText().trim().isEmpty() && this.lengthTextField.getText() == null
+				|| this.lengthTextField.getText().trim().isEmpty()) {
+			this.allFieldsAreEmpty = true;
+		}
 	}
 
 	public void generatePlaylist() {
@@ -160,7 +159,7 @@ public class GeneratePlaylistPage {
 		Random random = new Random();
 		int count = 0;
 		randomTargetLength = random.nextInt((PLAYLIST_MAX - PLAYLIST_MIN) + PLAYLIST_MIN);
-		while(count < randomTargetLength) {
+		while (count < randomTargetLength) {
 			for (Song song : this.songs) {
 				generatedSongs.add(song);
 				count++;
@@ -168,6 +167,7 @@ public class GeneratePlaylistPage {
 		}
 		checkForDuplicateSongs();
 	}
+
 	/**
 	 * Binds the list to an outside list
 	 * 

@@ -124,6 +124,8 @@ public class AddPage {
 	private boolean checkIfAdded() {
 		for (Song currentSong : this.songs) {
 			if (this.addedSong.hashCode() == currentSong.hashCode()) {
+				// note that songs that are identical except for tags are still considered
+				// identical because tags are based on your own thoughts
 				return true;
 			}
 		}
