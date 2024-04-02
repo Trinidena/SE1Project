@@ -1,4 +1,4 @@
-VM Arguements: --module-path "PATH\TO\javafx-sdk-20.0.1\lib" --add-modules javafx.controls,javafx.fxml
+VM Arguements: --module-path "PATH\TO\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml
 *replace PATH\TO with actual path to javafx sdk lib folder containing jars
 
 Example: On Campus School Computers
